@@ -5,10 +5,11 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.android.kmp.library)
+    `maven-publish`
 }
 
 group = "tj.zehn.rmbt"
-version = "0.1.0"
+version = providers.gradleProperty("sdkVersion").getOrElse("0.1.0")
 
 kotlin {
     compilerOptions {
@@ -90,4 +91,30 @@ kotlin {
 
 tasks.withType<JavaCompile>().configureEach {
     options.release.set(17)
+}
+
+publishing {
+    publications.withType<MavenPublication>().configureEach {
+        pom {
+            name.set("Zehn RMBT SDK")
+            description.set("Kotlin Multiplatform SDK for RMBT speed tests against Open-RMBT")
+            url.set("https://github.com/Hadamot/zehn-speedtest-sdk")
+            licenses {
+                license {
+                    name.set("Apache-2.0")
+                    url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri(providers.gradleProperty("publishUrl").getOrElse("https://maven.pkg.github.com/Hadamot/zehn-speedtest-sdk"))
+            credentials {
+                username = providers.environmentVariable("GITHUB_ACTOR").orNull
+                password = providers.environmentVariable("GITHUB_TOKEN").orNull
+            }
+        }
+    }
 }

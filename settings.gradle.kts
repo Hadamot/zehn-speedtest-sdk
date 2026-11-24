@@ -15,4 +15,5 @@ dependencyResolutionManagement {
     }
 }
 
-include(":core")
+include(":rmbt-sdk")
+project(":rmbt-sdk").projectDir = file("core")
