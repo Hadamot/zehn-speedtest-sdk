@@ -19,14 +19,14 @@ import tj.zehn.rmbt.measure.medianServerNanos
 import tj.zehn.rmbt.run.MeasurementRunner
 import tj.zehn.rmbt.transport.Connector
 import tj.zehn.rmbt.transport.RoutingConnector
-import tj.zehn.rmbt.transport.WebSocketConnector
+import tj.zehn.rmbt.transport.webSocketConnector
 import tj.zehn.rmbt.transport.socketConnector
 import kotlin.time.ExperimentalTime
 
 class RmbtClient(
     private val config: RmbtConfig,
     private val httpClient: HttpClient = HttpClient { install(WebSockets) },
-    private val connector: Connector = RoutingConnector(socketConnector(), WebSocketConnector(httpClient)),
+    private val connector: Connector = RoutingConnector(socketConnector(), webSocketConnector(httpClient)),
     private val clock: Clock = MonotonicClock(),
 ) {
     private var active: Job? = null
