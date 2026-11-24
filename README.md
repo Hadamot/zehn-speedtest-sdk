@@ -15,7 +15,7 @@ app ──► RmbtClient ──HTTP──► Control Server   (/settings, /testR
 | iOS 15+ | Swift Package `RmbtSdk` | TCP, TLS, WebSocket |
 | Browser, Node | npm `@hadamot/speedtest-sdk` | WebSocket |
 
-Current version: **0.1.0**.
+Current version: **0.1.1**.
 
 Default backend (Tojiktelecom, IPv4 only):
 
@@ -79,7 +79,7 @@ Module `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("tj.zehn.rmbt:rmbt-sdk:0.1.0")
+    implementation("tj.zehn.rmbt:rmbt-sdk:0.1.1")
 }
 ```
 
@@ -108,7 +108,7 @@ bundled `ws` dependency.
 ### iOS (Swift Package Manager)
 
 File → Add Package Dependencies → `https://github.com/Hadamot/zehn-speedtest-sdk`,
-rule "Up to Next Major" from `0.1.0`, product **RmbtSdk**. No account or token needed.
+rule "Up to Next Major" from `0.1.1`, product **RmbtSdk**. No account or token needed.
 
 Manual alternative: download `RmbtSdk.xcframework.zip` from the GitHub Release, unzip
 and drag `RmbtSdk.xcframework` into the project (Embed & Sign).
