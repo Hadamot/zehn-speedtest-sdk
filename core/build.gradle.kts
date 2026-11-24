@@ -28,6 +28,8 @@ kotlin {
         }
     }
     js {
+        binaries.library()
+        generateTypeScriptDefinitions()
         browser()
         nodejs {
             testTask { useMocha { timeout = "30s" } }
