@@ -13,4 +13,6 @@ data class RmbtConfig(
     val networkType: Int = Platform.defaultNetworkType,
     val clientInfo: ClientInfo = Platform.clientInfo,
     val measurementHost: String? = null,
-)
+) {
+    constructor(controlUrl: String, apiKey: String?) : this(controlUrl, apiKey, clientUuid = null)
+}

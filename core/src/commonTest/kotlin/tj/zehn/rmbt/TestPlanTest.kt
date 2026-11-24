@@ -31,4 +31,12 @@ class TestPlanTest {
 
         assertEquals("localhost", TestPlan.params(config, ticket(false)).endpoint.host)
     }
+
+    @Test
+    fun shortConfigConstructorUsesPlatformDefaults() {
+        val config = RmbtConfig("http://c", "key")
+
+        assertEquals(Platform.defaultTransport, config.transport)
+        assertEquals("key", config.apiKey)
+    }
 }

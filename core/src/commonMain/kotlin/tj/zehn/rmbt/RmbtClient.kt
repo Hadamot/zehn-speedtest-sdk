@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.flow.onEach
 import tj.zehn.rmbt.control.ControlClient
 import tj.zehn.rmbt.control.ResultMapper
 import tj.zehn.rmbt.measure.Clock
@@ -31,6 +32,8 @@ class RmbtClient(
 ) {
     private var active: Job? = null
 
+    constructor(config: RmbtConfig) : this(config, HttpClient { install(WebSockets) })
+
     fun start(): Flow<RmbtEvent> = channelFlow {
         active = currentCoroutineContext()[Job]
         try {
@@ -42,7 +45,9 @@ class RmbtClient(
         }
     }.buffer(Channel.UNLIMITED)
 
-    suspend fun run(): RmbtResult = when (val last = start().last()) {
+    suspend fun run(): RmbtResult = run {}
+
+    suspend fun run(onEvent: (RmbtEvent) -> Unit): RmbtResult = when (val last = start().onEach(onEvent).last()) {
         is RmbtEvent.Finished -> last.result
         is RmbtEvent.Failed -> throw last.error
         else -> error("measurement ended without result")

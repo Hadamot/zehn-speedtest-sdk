@@ -65,4 +65,14 @@ class RmbtClientTest {
 
         assertIs<RmbtEvent.Failed>(events.last())
     }
+
+    @Test
+    fun runWithCallbackReportsEveryEvent() = runTest {
+        val events = mutableListOf<RmbtEvent>()
+
+        client().run { events += it }
+
+        assertIs<RmbtEvent.Finished>(events.last())
+        assertTrue(events.any { it is RmbtEvent.Phase })
+    }
 }
