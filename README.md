@@ -31,15 +31,18 @@ be configured. Set `controlUrl` only for another backend (e.g. the local stack).
 
 ## 1. Access to packages
 
-The repository and its packages are private. Every consumer needs a GitHub token.
+The repository is public.
 
-1. GitHub → Settings → Developer settings → Personal access tokens → **Tokens (classic)**.
-2. Create a token with scopes `read:packages` (and `repo` for iOS release downloads).
-3. Your GitHub account must have read access to `Hadamot/zehn-speedtest-sdk`.
+| Package | Token needed |
+|---|---|
+| iOS (Swift Package, GitHub Release) | no |
+| Maven (GitHub Packages) | yes, GitHub requires it even for public packages |
+| npm (GitHub Packages) | yes, GitHub requires it even for public packages |
 
-In GitHub Actions of another Hadamot repository, use `${{ secrets.GITHUB_TOKEN }}` with
-`permissions: packages: read`, and grant that repository access under
-Package settings → Manage Actions access.
+Token for Maven and npm: GitHub → Settings → Developer settings → Personal access
+tokens → **Tokens (classic)** → scope `read:packages` only. Any GitHub account works.
+
+In GitHub Actions use `${{ secrets.GITHUB_TOKEN }}` with `permissions: packages: read`.
 
 ---
 
@@ -104,21 +107,11 @@ bundled `ws` dependency.
 
 ### iOS (Swift Package Manager)
 
-1. Xcode → Settings → Accounts → add your GitHub account (needed for the private
-   release download).
-2. File → Add Package Dependencies → `https://github.com/Hadamot/zehn-speedtest-sdk`,
-   rule "Up to Next Major" from `0.1.0`, product **RmbtSdk**.
+File → Add Package Dependencies → `https://github.com/Hadamot/zehn-speedtest-sdk`,
+rule "Up to Next Major" from `0.1.0`, product **RmbtSdk**. No account or token needed.
 
-Command-line builds (`xcodebuild`, CI) read credentials from `~/.netrc`:
-
-```
-machine github.com login <github-username> password <token>
-machine api.github.com login <github-username> password <token>
-```
-
-If the package download is still refused, download `RmbtSdk.xcframework.zip` from the
-GitHub Release, unzip it and drag `RmbtSdk.xcframework` into the project
-(Embed & Sign).
+Manual alternative: download `RmbtSdk.xcframework.zip` from the GitHub Release, unzip
+and drag `RmbtSdk.xcframework` into the project (Embed & Sign).
 
 ### Local development (no publishing)
 
@@ -302,7 +295,7 @@ threads interpolated) divided by t*.
 
 | Symptom | Cause / fix |
 |---|---|
-| `401` / `Could not resolve tj.zehn.rmbt:rmbt-sdk` / `npm 401` | Token missing, expired or without `read:packages` |
+| `401` / `Could not resolve tj.zehn.rmbt:rmbt-sdk` / `npm 401` | Token missing, expired or without `read:packages` (required by GitHub Packages even for public packages) |
 | `Connection refused` to measurement server | Wrong `test_server.web_address` (e.g. stale `HOST_IP`); fix the backend or set `measurementHost` |
 | `control server: SQL Error requesting from database.` on submit | Backend DB misses `interpolate_radio_signal_location_v2`; fix the database |
 | `No enum constant ... NetworkGroupType.CLI` | `networkType = 97` is not supported; use 98/99/mobile codes |
