@@ -5,23 +5,28 @@ import io.ktor.network.sockets.Socket
 import io.ktor.network.sockets.aSocket
 import io.ktor.network.sockets.openReadChannel
 import io.ktor.network.sockets.openWriteChannel
+import io.ktor.network.tls.TLSConfigBuilder
 import io.ktor.network.tls.tls
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.ByteWriteChannel
 import io.ktor.utils.io.readAvailable
 import io.ktor.utils.io.writeFully
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.currentCoroutineContext
 import tj.zehn.rmbt.Transport
-import java.security.cert.X509Certificate
-import javax.net.ssl.X509TrustManager
 
-class SocketConnector(private val selector: SelectorManager = SelectorManager(Dispatchers.IO)) : Connector {
+class SocketConnector(private val selector: SelectorManager = SelectorManager()) : Connector {
     override suspend fun connect(endpoint: Endpoint): Connection {
         val plain = aSocket(selector).tcp().connect(endpoint.host, endpoint.port) { noDelay = true }
-        val socket = if (endpoint.transport == Transport.TLS) plain.tls(Dispatchers.IO) { trustManager = TrustAll } else plain
+        val socket = if (endpoint.transport == Transport.TLS) {
+            plain.tls(currentCoroutineContext()) { acceptAnyCertificate() }
+        } else {
+            plain
+        }
         return SocketConnection(socket, socket.openReadChannel(), socket.openWriteChannel(autoFlush = false))
     }
 }
+
+internal expect fun TLSConfigBuilder.acceptAnyCertificate()
 
 private class SocketConnection(
     private val socket: Socket,
@@ -37,10 +42,4 @@ private class SocketConnection(
     override suspend fun flush() = output.flush()
 
     override suspend fun close() = socket.close()
-}
-
-private object TrustAll : X509TrustManager {
-    override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) = Unit
-    override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) = Unit
-    override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()
 }
