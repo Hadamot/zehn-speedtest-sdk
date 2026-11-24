@@ -29,6 +29,12 @@ kotlin {
         }
     }
     js {
+        outputModuleName.set("speedtest-sdk")
+        compilations["main"].packageJson {
+            name = "@hadamot/speedtest-sdk"
+            customField("publishConfig", mapOf("registry" to "https://npm.pkg.github.com"))
+            customField("repository", "https://github.com/Hadamot/zehn-speedtest-sdk")
+        }
         binaries.library()
         generateTypeScriptDefinitions()
         browser()
