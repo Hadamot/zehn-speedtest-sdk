@@ -349,3 +349,9 @@ Versions are immutable: publish a new version for every change.
 - TLS to measurement servers accepts any certificate on JVM/Android (self-signed
   servers); iOS uses system trust.
 - WebSocket chunks are capped at 32 KiB for `rmbtd` compatibility.
+
+---
+
+## License
+
+[Apache License 2.0](LICENSE).
