@@ -17,6 +17,7 @@ sealed interface ServerMessage {
             return when {
                 parts[0].startsWith("RMBTv") -> Version(parts[0])
                 parts[0] == "ACCEPT" -> Accept(parts.drop(1).toSet())
+                parts[0] == "CHUNKSIZE" && parts.size == 2 -> parts[1].toInt().let { ChunkSize(it, it, it) }
                 parts[0] == "CHUNKSIZE" && parts.size == 4 ->
                     ChunkSize(parts[1].toInt(), parts[2].toInt(), parts[3].toInt())
                 parts[0] == "TIME" && parts.size == 4 && parts[2] == "BYTES" ->

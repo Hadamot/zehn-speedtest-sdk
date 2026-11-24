@@ -44,3 +44,10 @@ class ServerMessageTest {
         assertFailsWith<IllegalArgumentException> { ServerMessage.parse("HELLO") }
     }
 }
+
+class LegacyChunkSizeTest {
+    @Test
+    fun parsesSingleValueChunkSizeOfOldServers() {
+        assertEquals(ServerMessage.ChunkSize(4096, 4096, 4096), ServerMessage.parse("CHUNKSIZE 4096"))
+    }
+}
