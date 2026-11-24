@@ -12,6 +12,57 @@ One API on every platform: `RmbtClient(config)` → events (phase, progress) →
 | JVM (backend, CLI probes) | JAR | TCP / TLS, WebSocket |
 | Browser / Node | npm module + `.d.ts` | WebSocket only |
 
+## Install
+
+Releases go to GitHub Packages of `Hadamot/zehn-speedtest-sdk` (Maven + npm) and
+GitHub Releases (iOS XCFramework). Reading GitHub Packages needs a token with
+`read:packages`.
+
+### Android / JVM (Gradle)
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/Hadamot/zehn-speedtest-sdk")
+        credentials {
+            username = providers.gradleProperty("gpr.user").get()
+            password = providers.gradleProperty("gpr.token").get()
+        }
+    }
+}
+
+dependencies {
+    implementation("tj.zehn.rmbt:rmbt-sdk:0.1.0")
+}
+```
+
+Local development without publishing: `./gradlew :rmbt-sdk:publishToMavenLocal`
+and add `mavenLocal()`, or `includeBuild("../zehn-speedtest-sdk")` in `settings.gradle`.
+
+### Web (npm)
+
+```
+# .npmrc
+@hadamot:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+```bash
+pnpm add @hadamot/speedtest-sdk
+```
+
+Works in browsers (native WebSocket) and Node (`ws` package).
+
+### iOS (Swift Package Manager)
+
+Xcode → Add Package → `https://github.com/Hadamot/zehn-speedtest-sdk`, product `RmbtSdk`.
+
+## Release
+
+Actions → `release` → Run workflow with a version. It builds the XCFramework on
+macOS, updates `Package.swift` (URL + checksum), commits and tags `v<version>`,
+creates the GitHub Release, then publishes Maven artifacts and the npm package.
+
 ## Flow
 
 1. `POST /settings` registers the client (skipped when `clientUuid` is set).
@@ -69,7 +120,8 @@ passed) and the `Flow` from `start()` has no `for await`; adding SKIE fixes both
 ### Web (TypeScript)
 
 ```ts
-import { tj } from "zehn-speedtest-sdk-core";
+import sdk from "@hadamot/speedtest-sdk";
+const { tj } = sdk;
 
 const client = new tj.zehn.rmbt.web.RmbtWebClient(
   new tj.zehn.rmbt.web.RmbtWebOptions("https://speed.example.tj/RMBTControlServer"),
@@ -86,10 +138,10 @@ The measurement server must run with `-w` (WebSocket mode).
 ## Build and test
 
 ```bash
-./gradlew :core:jvmTest :core:jsNodeTest
-./gradlew :core:bundleAndroidMainAar
-./gradlew :core:jsBrowserProductionLibraryDistribution
-./gradlew :core:linkReleaseFrameworkIosArm64
+./gradlew :rmbt-sdk:jvmTest :rmbt-sdk:jsNodeTest
+./gradlew :rmbt-sdk:bundleAndroidMainAar
+./gradlew :rmbt-sdk:jsBrowserProductionLibraryDistribution
+./gradlew :rmbt-sdk:linkReleaseFrameworkIosArm64
 ```
 
 Requires JDK 17+ and an Android SDK (`local.properties` → `sdk.dir`).
@@ -99,7 +151,7 @@ Tests against a live backend (local-speedtest compose) are skipped unless env is
 
 ```bash
 RMBT_IT_CONTROL=http://localhost:18080/RMBTControlServer RMBT_IT_HOST=localhost \
-RMBT_IT_TRANSPORT=TCP ./gradlew :core:jvmTest --tests '*EndToEndTest*' --rerun
+RMBT_IT_TRANSPORT=TCP ./gradlew :rmbt-sdk:jvmTest --tests '*EndToEndTest*' --rerun
 ```
 
 ## Known limitations
