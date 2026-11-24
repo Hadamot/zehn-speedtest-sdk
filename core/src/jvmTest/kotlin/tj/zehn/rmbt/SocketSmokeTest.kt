@@ -31,6 +31,7 @@ class SocketSmokeTest {
             pings = 5,
             httpUpgrade = !transport.isWebSocket,
             pretestNanos = 1_000_000_000,
+            maxChunkSize = if (transport.isWebSocket) 32_768 else 262_144,
         )
 
         val measurement = runner.run(params)
