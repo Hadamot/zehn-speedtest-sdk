@@ -16,5 +16,7 @@ private suspend fun RmbtSocket.upgrade() {
     sendRaw(UPGRADE_REQUEST)
     val status = readLine()
     if (!status.contains(" 101")) throw UnexpectedMessageException("HTTP 101", status)
-    while (readLine().isNotEmpty()) Unit
+    do {
+        val header = readLine()
+    } while (header.isNotEmpty())
 }
