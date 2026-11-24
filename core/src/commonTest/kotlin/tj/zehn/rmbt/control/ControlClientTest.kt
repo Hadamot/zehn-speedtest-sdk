@@ -44,7 +44,7 @@ class ControlClientTest {
 
         val ticket = client(body).requestTest("c-1", threads = null)
 
-        assertEquals(TestTicket.Parsed("t-1", "t-1_1_x", "10.0.0.5", 8081, false, true, "Local", 7, 3, 10, 0), ticket.parsed())
+        assertEquals(TestTicket.Parsed("t-1", "t-1_1_x", "10.0.0.5", 8081, false, true, "Local", 7, 3, 10, 0, "O1"), ticket.parsed())
         assertTrue(requests.single().json().contains("\"uuid\":\"c-1\""))
     }
 

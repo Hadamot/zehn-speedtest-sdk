@@ -31,6 +31,7 @@ data class TestTicket(
         val threads: Int,
         val pings: Int,
         val waitSec: Int,
+        val openTestUuid: String? = null,
     )
 
     fun parsed() = Parsed(
@@ -45,5 +46,6 @@ data class TestTicket(
         threads = threads.toInt(),
         pings = pings.toInt(),
         waitSec = waitSec,
+        openTestUuid = openTestUuid,
     )
 }
