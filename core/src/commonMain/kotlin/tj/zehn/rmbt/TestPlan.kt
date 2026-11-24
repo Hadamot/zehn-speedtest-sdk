@@ -22,9 +22,7 @@ internal object TestPlan {
     }
 
     private fun transport(requested: Transport, encrypted: Boolean): Transport = when {
-        !encrypted -> requested
-        requested == Transport.TCP -> Transport.TLS
-        requested == Transport.WEBSOCKET -> Transport.SECURE_WEBSOCKET
-        else -> requested
+        requested.isWebSocket -> if (encrypted) Transport.SECURE_WEBSOCKET else Transport.WEBSOCKET
+        else -> if (encrypted) Transport.TLS else Transport.TCP
     }
 }

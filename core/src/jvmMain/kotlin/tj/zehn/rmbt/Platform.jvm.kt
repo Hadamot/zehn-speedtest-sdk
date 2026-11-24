@@ -6,7 +6,7 @@ import java.util.TimeZone
 
 actual object Platform {
     actual val defaultTransport: Transport = Transport.TCP
-    actual val defaultNetworkType: Int = 97
+    actual val defaultNetworkType: Int = 98
     actual val clientInfo: ClientInfo = ClientInfo(
         platform = "JVM",
         type = "DESKTOP",
