@@ -28,4 +28,9 @@ class RmbtWebOptionsTest {
         assertNull(config.apiKey)
         assertNull(config.durationSec)
     }
+
+    @Test
+    fun defaultsToTojiktelecomControlServer() {
+        assertEquals(tj.zehn.rmbt.RmbtConfig.DEFAULT_CONTROL_URL, RmbtWebOptions().toConfig().controlUrl)
+    }
 }

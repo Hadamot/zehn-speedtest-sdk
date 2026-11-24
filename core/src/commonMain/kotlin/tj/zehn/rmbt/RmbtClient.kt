@@ -32,6 +32,8 @@ class RmbtClient(
 ) {
     private var active: Job? = null
 
+    constructor() : this(RmbtConfig())
+
     constructor(config: RmbtConfig) : this(config, HttpClient { install(WebSockets) })
 
     fun start(): Flow<RmbtEvent> = channelFlow {

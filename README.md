@@ -17,6 +17,16 @@ app ──► RmbtClient ──HTTP──► Control Server   (/settings, /testR
 
 Current version: **0.1.0**.
 
+Default backend (Tojiktelecom, IPv4 only):
+
+| | Address |
+|---|---|
+| Control Server (API, statistics, map) | `https://speedtest.tojiktelecom.tj/RMBTControlServer` |
+| Measurement server | `speedtest-m1.tojiktelecom.tj:443` (TLS), assigned by `/testRequest` |
+
+With no configuration the SDK uses this backend; the measurement server never needs to
+be configured. Set `controlUrl` only for another backend (e.g. the local stack).
+
 ---
 
 ## 1. Access to packages
@@ -129,7 +139,6 @@ Or a Gradle composite build: `includeBuild("../zehn-speedtest-sdk")` in `setting
 ```kotlin
 val client = RmbtClient(
     RmbtConfig(
-        controlUrl = "https://speed.example.tj/RMBTControlServer",
         apiKey = "android-app",
         clientUuid = prefs.getString("rmbt_client_uuid", null),
         networkType = 99,
@@ -156,7 +165,7 @@ cancelButton.setOnClickListener { client.cancel() }
 Without progress UI (backend job, probe, CLI):
 
 ```kotlin
-val result = RmbtClient(RmbtConfig(controlUrl = url, tag = "probe-dushanbe-1")).run()
+val result = RmbtClient(RmbtConfig(tag = "probe-dushanbe-1")).run()
 println("↓ ${result.downloadMbps} ↑ ${result.uploadMbps} Mbit/s, ping ${result.pingMs} ms")
 ```
 
@@ -166,7 +175,7 @@ println("↓ ${result.downloadMbps} ↑ ${result.uploadMbps} Mbit/s, ping ${resu
 import RmbtSdk
 
 let client = RmbtClient(
-    config: RmbtConfig(controlUrl: "https://speed.example.tj/RMBTControlServer", apiKey: "ios-app")
+    config: RmbtConfig(controlUrl: RmbtConfig.companion.DEFAULT_CONTROL_URL, apiKey: "ios-app")
 )
 
 Task {
@@ -185,8 +194,8 @@ Task {
 client.cancel()
 ```
 
-`RmbtClient(config:)`, `RmbtConfig(controlUrl:apiKey:)` and `run(onEvent:)` require
-SDK **0.1.1+**. `RmbtConfig(controlUrl:apiKey:)` uses platform defaults. For more options use the full
+`RmbtClient()`, `RmbtClient(config:)`, `RmbtConfig()`, `RmbtConfig(controlUrl:apiKey:)`
+and `run(onEvent:)` require SDK **0.1.1+**; `RmbtClient()` alone targets the default backend. `RmbtConfig(controlUrl:apiKey:)` uses platform defaults. For more options use the full
 initializer; Kotlin default arguments are not visible in Swift, so pass every field
 (`Platform.shared` holds the defaults).
 
@@ -199,7 +208,7 @@ const { RmbtWebClient, RmbtWebOptions } = sdk.tj.zehn.rmbt.web;
 
 const client = new RmbtWebClient(
   new RmbtWebOptions(
-    "https://speed.example.tj/RMBTControlServer",
+    undefined,
     "web-site",
     localStorage.getItem("rmbtClientUuid"),
   ),
@@ -218,7 +227,8 @@ stopButton.onclick = () => client.cancel();
 ```
 
 Run it in the browser only (in Nuxt: `onMounted` or a `.client` component), never
-during SSR. `RmbtWebOptions(controlUrl, apiKey?, clientUuid?, threads?, durationSec?, tag?, measurementHost?)`.
+during SSR. `RmbtWebOptions(controlUrl?, apiKey?, clientUuid?, threads?, durationSec?, tag?, measurementHost?)`;
+`new RmbtWebOptions()` targets the default backend.
 
 ---
 
@@ -228,7 +238,7 @@ during SSR. `RmbtWebOptions(controlUrl, apiKey?, clientUuid?, threads?, duration
 
 | Field | Default | Meaning |
 |---|---|---|
-| `controlUrl` | required | Control Server base URL, e.g. `https://host/RMBTControlServer` |
+| `controlUrl` | `https://speedtest.tojiktelecom.tj/RMBTControlServer` | Control Server base URL (`RmbtConfig.DEFAULT_CONTROL_URL`) |
 | `apiKey` | `null` | Sent as `X-Api-Key` header on Control Server calls; identifies the source app at a gateway |
 | `clientUuid` | `null` | Stored client id; `null` registers a new client via `/settings` |
 | `transport` | JVM/Android/iOS `TCP`, JS `WEBSOCKET` | `TCP`/`TLS` or `WEBSOCKET`/`SECURE_WEBSOCKET`; encryption follows the server ticket |

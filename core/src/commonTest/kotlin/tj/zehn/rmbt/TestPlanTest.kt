@@ -39,4 +39,10 @@ class TestPlanTest {
         assertEquals(Platform.defaultTransport, config.transport)
         assertEquals("key", config.apiKey)
     }
+
+    @Test
+    fun defaultsToTojiktelecomControlServer() {
+        assertEquals("https://speedtest.tojiktelecom.tj/RMBTControlServer", RmbtConfig().controlUrl)
+        assertEquals(RmbtConfig.DEFAULT_CONTROL_URL, RmbtConfig(apiKey = "k").controlUrl)
+    }
 }

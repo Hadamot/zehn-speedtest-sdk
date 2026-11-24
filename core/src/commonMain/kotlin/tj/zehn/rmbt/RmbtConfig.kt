@@ -3,7 +3,7 @@ package tj.zehn.rmbt
 import tj.zehn.rmbt.control.ClientInfo
 
 data class RmbtConfig(
-    val controlUrl: String,
+    val controlUrl: String = DEFAULT_CONTROL_URL,
     val apiKey: String? = null,
     val clientUuid: String? = null,
     val transport: Transport = Platform.defaultTransport,
@@ -14,5 +14,11 @@ data class RmbtConfig(
     val clientInfo: ClientInfo = Platform.clientInfo,
     val measurementHost: String? = null,
 ) {
+    constructor() : this(DEFAULT_CONTROL_URL, apiKey = null)
+
     constructor(controlUrl: String, apiKey: String?) : this(controlUrl, apiKey, clientUuid = null)
+
+    companion object {
+        const val DEFAULT_CONTROL_URL = "https://speedtest.tojiktelecom.tj/RMBTControlServer"
+    }
 }

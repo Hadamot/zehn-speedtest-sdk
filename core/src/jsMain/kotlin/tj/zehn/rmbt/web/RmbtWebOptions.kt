@@ -6,7 +6,7 @@ import tj.zehn.rmbt.RmbtConfig
 
 @JsExport
 class RmbtWebOptions(
-    val controlUrl: String,
+    val controlUrl: String = RmbtConfig.DEFAULT_CONTROL_URL,
     val apiKey: String? = null,
     val clientUuid: String? = null,
     val threads: Int? = null,
