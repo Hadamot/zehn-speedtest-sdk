@@ -7,9 +7,15 @@ object ChunkSizer {
     private const val CHUNKS_PER_SECOND = 50
     private const val KIB = 1024
 
-    fun choose(bytes: Long, nanos: Long, rttNanos: Long, limits: ServerMessage.ChunkSize): Int {
+    fun choose(
+        bytes: Long,
+        nanos: Long,
+        rttNanos: Long,
+        limits: ServerMessage.ChunkSize,
+        cap: Int = MAX_CHUNK_SIZE,
+    ): Int {
         val low = limits.min
-        val high = minOf(limits.max, MAX_CHUNK_SIZE)
+        val high = maxOf(low, minOf(limits.max, cap))
         val transferNanos = if (nanos > rttNanos) nanos - rttNanos else nanos
         if (bytes <= 0 || transferNanos <= 0) return low
         val bytesPerSecond = bytes * 1e9 / transferNanos

@@ -1,5 +1,6 @@
 package tj.zehn.rmbt.run
 
+import tj.zehn.rmbt.measure.ChunkSizer
 import tj.zehn.rmbt.transport.Endpoint
 
 data class TestParams(
@@ -10,4 +11,5 @@ data class TestParams(
     val pings: Int,
     val httpUpgrade: Boolean,
     val pretestNanos: Long = 2_000_000_000,
+    val maxChunkSize: Int = ChunkSizer.MAX_CHUNK_SIZE,
 )

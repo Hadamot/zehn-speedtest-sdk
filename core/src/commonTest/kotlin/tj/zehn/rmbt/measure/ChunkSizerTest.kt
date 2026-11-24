@@ -40,3 +40,14 @@ class ChunkSizerTest {
         assertEquals(4096, ChunkSizer.choose(bytes = 0, nanos = 0, rttNanos = 0, limits = limits))
     }
 }
+
+class ChunkSizerCapTest {
+    @Test
+    fun respectsCallerCap() {
+        val limits = ServerMessage.ChunkSize(4096, 4096, 4_194_304)
+
+        val size = ChunkSizer.choose(10_000_000_000, 1_000_000_000, 0, limits, cap = 32_768)
+
+        assertEquals(32_768, size)
+    }
+}

@@ -25,7 +25,7 @@ class MeasurementRunner(
             phase(TestPhase.INIT)
             repeat(params.threads) { opened += connector.open(params) }
             phase(TestPhase.DOWN_PRETEST)
-            val pretests = opened.parallel { _, s -> s.socket.pretestDownload(s.limits, params.pretestNanos, clock) }
+            val pretests = opened.parallel { _, s -> s.socket.pretestDownload(s.limits, params.pretestNanos, clock, params.maxChunkSize) }
             var sessions = if (pretests.first().chunks <= SLOW_PRETEST_CHUNKS) opened.take(1) else opened.toList()
             opened.drop(sessions.size).forEach { it.close() }
             val chunks = sessions.indices.map { Random.nextBytes(pretests[it].chunkSize) }
