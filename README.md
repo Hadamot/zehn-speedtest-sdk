@@ -31,18 +31,21 @@ be configured. Set `controlUrl` only for another backend (e.g. the local stack).
 
 ## 1. Access to packages
 
-The repository is public.
+The repository and all packages are public: anyone can install them, no access to
+the Hadamot organization is needed. Browse them at
+[github.com/orgs/Hadamot/packages](https://github.com/orgs/Hadamot/packages?repo_name=zehn-speedtest-sdk).
 
 | Package | Token needed |
 |---|---|
 | iOS (Swift Package, GitHub Release) | no |
-| Maven (GitHub Packages) | yes, GitHub requires it even for public packages |
-| npm (GitHub Packages) | yes, GitHub requires it even for public packages |
+| Maven (GitHub Packages) | yes, any GitHub account; GitHub requires it even for public packages |
+| npm (GitHub Packages) | yes, any GitHub account; GitHub requires it even for public packages |
 
 Token for Maven and npm: GitHub → Settings → Developer settings → Personal access
-tokens → **Tokens (classic)** → scope `read:packages` only. Any GitHub account works.
+tokens → **Tokens (classic)** → scope `read:packages` only.
 
-In GitHub Actions use `${{ secrets.GITHUB_TOKEN }}` with `permissions: packages: read`.
+In GitHub Actions of any repository use `${{ secrets.GITHUB_TOKEN }}` with
+`permissions: packages: read`.
 
 ---
 
