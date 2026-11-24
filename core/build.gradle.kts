@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -12,6 +13,7 @@ group = "tj.zehn.rmbt"
 version = providers.gradleProperty("sdkVersion").getOrElse("0.1.0")
 
 kotlin {
+    val xcFramework = XCFramework("RmbtSdk")
     compilerOptions {
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
@@ -45,6 +47,7 @@ kotlin {
     listOf(iosArm64(), iosSimulatorArm64(), iosX64()).forEach {
         it.binaries.framework {
             baseName = "RmbtSdk"
+            xcFramework.add(this)
         }
     }
 
