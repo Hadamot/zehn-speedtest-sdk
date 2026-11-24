@@ -1,0 +1,13 @@
+package tj.zehn.rmbt.run
+
+import tj.zehn.rmbt.transport.Endpoint
+
+data class TestParams(
+    val endpoint: Endpoint,
+    val token: String,
+    val threads: Int,
+    val durationSec: Int,
+    val pings: Int,
+    val httpUpgrade: Boolean,
+    val pretestNanos: Long = 2_000_000_000,
+)
