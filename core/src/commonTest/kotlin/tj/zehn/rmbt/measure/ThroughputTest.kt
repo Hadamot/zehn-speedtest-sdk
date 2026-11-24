@@ -45,3 +45,26 @@ class ThroughputTest {
         assertFailsWith<IllegalArgumentException> { Throughput.bitsPerSecond(threads) }
     }
 }
+
+class RateTest {
+    @Test
+    fun exposesBytesAndDurationAtEarliestFinish() {
+        val threads = listOf(listOf(Sample(1_000_000_000, 1_000)), listOf(Sample(2_000_000_000, 2_000)))
+
+        val rate = Throughput.measure(threads)
+
+        assertEquals(Rate(bytes = 2_000.0, nanos = 1_000_000_000), rate)
+    }
+
+    @Test
+    fun skipsThreadsWithoutSamplesWhenMeasuring() {
+        val rate = Throughput.measure(listOf(listOf(Sample(1_000_000_000, 1_000)), emptyList()))
+
+        assertEquals(8_000.0, rate.bitsPerSecond)
+    }
+
+    @Test
+    fun measuresZeroWithoutAnySamples() {
+        assertEquals(0.0, Throughput.measure(listOf(emptyList())).bitsPerSecond)
+    }
+}
