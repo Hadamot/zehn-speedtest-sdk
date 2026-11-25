@@ -125,5 +125,9 @@ publishing {
                 password = providers.environmentVariable("GITHUB_TOKEN").orNull
             }
         }
+        maven {
+            name = "Pages"
+            url = uri(rootProject.file(providers.gradleProperty("pagesRepo").getOrElse("build/pages/maven")))
+        }
     }
 }
