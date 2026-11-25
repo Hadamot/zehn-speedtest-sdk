@@ -16,7 +16,7 @@ class EndToEndTest {
             tag = "sdk-e2e",
         )
 
-        val result = RmbtClient(config).run()
+        val result = RmbtClient(config).run { println(it) }
 
         println(result)
         assertTrue(result.downloadMbps > 0 && result.uploadMbps > 0)
