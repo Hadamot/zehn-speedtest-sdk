@@ -8,8 +8,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "RmbtSdk",
-            url: "https://github.com/Hadamot/zehn-speedtest-sdk/releases/download/v0.1.1/RmbtSdk.xcframework.zip",
-            checksum: "44230bfb7078f7d007abb5c3403dae035fb8921cbaed2f5b9bc34d559c36ca22"
+            url: "https://github.com/Hadamot/zehn-speedtest-sdk/releases/download/v0.1.2/RmbtSdk.xcframework.zip",
+            checksum: "62b9f9cbf97da50def7b7547728cf31802edd23f657e88fd3dc2375519b7753a"
         ),
     ]
 )
