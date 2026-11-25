@@ -65,8 +65,11 @@ Module `build.gradle.kts`:
 ```kotlin
 dependencies {
     implementation("tj.zehn.rmbt:rmbt-sdk:0.1.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
 }
 ```
+
+The coroutines line is needed only for 0.1.2; later versions expose it transitively.
 
 Gradle picks the right variant (`rmbt-sdk-android`, `rmbt-sdk-jvm`) automatically.
 Android apps need `<uses-permission android:name="android.permission.INTERNET" />`, and
