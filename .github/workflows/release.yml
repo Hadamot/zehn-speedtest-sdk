@@ -39,12 +39,16 @@ jobs:
       - uses: actions/checkout@v5
         with:
           ref: v${{ inputs.version }}
+      - uses: actions/checkout@v5
+        with:
+          ref: gh-pages
+          path: pages
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
       - uses: gradle/actions/setup-gradle@v5
-      - run: ./gradlew :rmbt-sdk:publishAllPublicationsToGitHubPackagesRepository :rmbt-sdk:jsBrowserProductionLibraryDistribution -PsdkVersion="${{ inputs.version }}"
+      - run: ./gradlew :rmbt-sdk:publishAllPublicationsToGitHubPackagesRepository :rmbt-sdk:publishAllPublicationsToPagesRepository :rmbt-sdk:jsBrowserProductionLibraryDistribution -PsdkVersion="${{ inputs.version }}" -PpagesRepo=pages/maven
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
@@ -57,3 +61,17 @@ jobs:
         working-directory: core/build/dist/js/productionLibrary
         env:
           NODE_AUTH_TOKEN: ${{ github.token }}
+      - run: |
+          npm pack --pack-destination "$RUNNER_TEMP"
+          mv "$RUNNER_TEMP"/hadamot-speedtest-sdk-*.tgz "$RUNNER_TEMP/speedtest-sdk-${{ inputs.version }}.tgz"
+          gh release upload "v${{ inputs.version }}" "$RUNNER_TEMP/speedtest-sdk-${{ inputs.version }}.tgz"
+        working-directory: core/build/dist/js/productionLibrary
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git add maven
+          git commit -m "build: publish maven ${{ inputs.version }}"
+          git push origin gh-pages
+        working-directory: pages
