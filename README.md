@@ -288,7 +288,7 @@ threads interpolated) divided by t*.
   The address in `test_server.web_address` must be reachable by clients.
 - Browsers: `rmbtd -w` (WebSocket). A page served over HTTPS needs the encrypted
   measurement port (`wss://`), otherwise the browser blocks mixed content.
-- Control Server CORS (`CONTROL_ALLOWED_ORIGIN`) must allow the web origin.
+- Control Server CORS (`CONTROL_ALLOWED_ORIGIN`) must allow the web origin. Production currently allows only `https://speedtest.tojiktelecom.tj`; other sites get a 403 preflight until added there.
 - Local stack: `../local-speedtest` (`docker compose up -d`), Control Server on
   `:18080`, `rmbtd` on `:18081` (plain) and `:18082` (TLS).
 
