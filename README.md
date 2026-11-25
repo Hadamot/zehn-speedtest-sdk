@@ -15,7 +15,7 @@ app ──► RmbtClient ──HTTP──► Control Server   (/settings, /testR
 | iOS 15+ | Swift Package `RmbtSdk` | TCP, TLS, WebSocket |
 | Browser, Node | npm `@hadamot/speedtest-sdk` | WebSocket |
 
-Current version: **0.1.1**.
+Current version: **0.1.2**.
 
 Default backend (Tojiktelecom, IPv4 only):
 
@@ -31,34 +31,22 @@ be configured. Set `controlUrl` only for another backend (e.g. the local stack).
 
 ## 1. Access to packages
 
-The repository and all packages are public: anyone can install them, no access to
-the Hadamot organization is needed. Browse them at
-[github.com/orgs/Hadamot/packages](https://github.com/orgs/Hadamot/packages?repo_name=zehn-speedtest-sdk).
+Everything is public and installs without a GitHub account or token.
 
-| Package | Token needed |
+| Platform | Source |
 |---|---|
-| iOS (Swift Package, GitHub Release) | no |
-| Maven (GitHub Packages) | yes, any GitHub account; GitHub requires it even for public packages |
-| npm (GitHub Packages) | yes, any GitHub account; GitHub requires it even for public packages |
+| Android / JVM | Maven repo on GitHub Pages: `https://hadamot.github.io/zehn-speedtest-sdk/maven` |
+| Web / Node | npm tarball attached to each [GitHub Release](https://github.com/Hadamot/zehn-speedtest-sdk/releases) |
+| iOS | Swift Package from this repository |
 
-Token for Maven and npm: GitHub → Settings → Developer settings → Personal access
-tokens → **Tokens (classic)** → scope `read:packages` only.
-
-In GitHub Actions of any repository use `${{ secrets.GITHUB_TOKEN }}` with
-`permissions: packages: read`.
+Packages are also mirrored to GitHub Packages (`maven.pkg.github.com`, `npm.pkg.github.com`);
+those need a `read:packages` token, so prefer the sources above. Tokenless install starts at **0.1.2**.
 
 ---
 
 ## 2. Install
 
 ### Android / JVM (Gradle)
-
-`~/.gradle/gradle.properties` (never commit the token):
-
-```properties
-gpr.user=<github-username>
-gpr.token=<token>
-```
 
 `settings.gradle.kts`:
 
@@ -67,13 +55,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = uri("https://maven.pkg.github.com/Hadamot/zehn-speedtest-sdk")
-            credentials {
-                username = providers.gradleProperty("gpr.user").orNull ?: System.getenv("GITHUB_ACTOR")
-                password = providers.gradleProperty("gpr.token").orNull ?: System.getenv("GITHUB_TOKEN")
-            }
-        }
+        maven("https://hadamot.github.io/zehn-speedtest-sdk/maven")
     }
 }
 ```
@@ -82,7 +64,7 @@ Module `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("tj.zehn.rmbt:rmbt-sdk:0.1.1")
+    implementation("tj.zehn.rmbt:rmbt-sdk:0.1.2")
 }
 ```
 
@@ -93,25 +75,18 @@ Server is plain `http://`.
 
 ### Web (npm, pnpm, yarn)
 
-`.npmrc` in the project root:
-
-```
-@hadamot:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-```
-
 ```bash
-export GITHUB_TOKEN=<token>
-pnpm add @hadamot/speedtest-sdk
+pnpm add https://github.com/Hadamot/zehn-speedtest-sdk/releases/download/v0.1.2/speedtest-sdk-0.1.2.tgz
 ```
 
+The package name stays `@hadamot/speedtest-sdk`; to upgrade, change the version in the URL.
 TypeScript typings are included. Browsers use the native `WebSocket`; Node uses the
 bundled `ws` dependency.
 
 ### iOS (Swift Package Manager)
 
 File → Add Package Dependencies → `https://github.com/Hadamot/zehn-speedtest-sdk`,
-rule "Up to Next Major" from `0.1.1`, product **RmbtSdk**. No account or token needed.
+rule "Up to Next Major" from `0.1.2`, product **RmbtSdk**. No account or token needed.
 
 Manual alternative: download `RmbtSdk.xcframework.zip` from the GitHub Release, unzip
 and drag `RmbtSdk.xcframework` into the project (Embed & Sign).
@@ -298,7 +273,8 @@ threads interpolated) divided by t*.
 
 | Symptom | Cause / fix |
 |---|---|
-| `401` / `Could not resolve tj.zehn.rmbt:rmbt-sdk` / `npm 401` | Token missing, expired or without `read:packages` (required by GitHub Packages even for public packages) |
+| `Could not resolve tj.zehn.rmbt:rmbt-sdk` | Missing `maven("https://hadamot.github.io/zehn-speedtest-sdk/maven")` or version below 0.1.2 |
+| `401` from `*.pkg.github.com` | GitHub Packages mirror needs a `read:packages` token; use the tokenless sources instead |
 | `Connection refused` to measurement server | Wrong `test_server.web_address` (e.g. stale `HOST_IP`); fix the backend or set `measurementHost` |
 | `control server: SQL Error requesting from database.` on submit | Backend DB misses `interpolate_radio_signal_location_v2`; fix the database |
 | `No enum constant ... NetworkGroupType.CLI` | `networkType = 97` is not supported; use 98/99/mobile codes |
@@ -340,7 +316,8 @@ gh workflow run release -R Hadamot/zehn-speedtest-sdk -f version=0.2.0
 
 The workflow builds the XCFramework on macOS, writes its URL and checksum into
 `Package.swift`, commits `build: release <version>`, tags `v<version>`, creates the GitHub
-Release, then publishes Maven artifacts and the npm package to GitHub Packages.
+Release, then publishes Maven artifacts to the `gh-pages` branch (served by GitHub Pages) and
+GitHub Packages, attaches `speedtest-sdk-<version>.tgz` to the Release and publishes npm to GitHub Packages.
 Versions are immutable: publish a new version for every change.
 
 ---
