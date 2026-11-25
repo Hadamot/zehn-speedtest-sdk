@@ -1,0 +1,165 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../rmbt-sdk/0.1.2/rmbt-sdk-0.1.2.module",
+    "group": "tj.zehn.rmbt",
+    "module": "rmbt-sdk",
+    "version": "0.1.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.3.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "rmbt-sdk.aar",
+          "url": "rmbt-sdk-android-0.1.2.aar",
+          "size": 252853,
+          "sha512": "4e1ef936ddccc4e05b17cc9bfe1ac6bc712e26c6b0020ceb7874989db7af7bf4bfd9208cc32bded1e4ee8f5e610fa4190c3d5d0339e910d3750195455cf281e5",
+          "sha256": "0e0e635648a2fb52400316ad95de78a03b3e1fe119185f853d577caf62b25101",
+          "sha1": "78879ae0569c85836c8ef9342ddd97877d6d52f2",
+          "md5": "3ca0af4a9dfa34ae1c40d9644a6a2beb"
+        }
+      ]
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-okhttp",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-network",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-network-tls",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.11.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.13.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-websockets",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-content-negotiation",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-serialization-kotlinx-json",
+          "version": {
+            "requires": "3.6.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "rmbt-sdk.aar",
+          "url": "rmbt-sdk-android-0.1.2.aar",
+          "size": 252853,
+          "sha512": "4e1ef936ddccc4e05b17cc9bfe1ac6bc712e26c6b0020ceb7874989db7af7bf4bfd9208cc32bded1e4ee8f5e610fa4190c3d5d0339e910d3750195455cf281e5",
+          "sha256": "0e0e635648a2fb52400316ad95de78a03b3e1fe119185f853d577caf62b25101",
+          "sha1": "78879ae0569c85836c8ef9342ddd97877d6d52f2",
+          "md5": "3ca0af4a9dfa34ae1c40d9644a6a2beb"
+        }
+      ]
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "rmbt-sdk-android-0.1.2-sources.jar",
+          "url": "rmbt-sdk-android-0.1.2-sources.jar",
+          "size": 26680,
+          "sha512": "713af5ff3fe867e18d6e1427f82dd2e84e91315a3dab8f84213c29e49b929c1267a5f334320e137bae72c493bb1ffc1b0424a1a37ae2035ec63821242daac9c1",
+          "sha256": "f770d45500d371420f82ca1b6622266e314bf82f626d60a5539a28bec299e55b",
+          "sha1": "145409d94dbb5c149d886093678d9975b9b9dea2",
+          "md5": "dbc367ab1596e836dc3e90a77652ab6b"
+        }
+      ]
+    }
+  ]
+}

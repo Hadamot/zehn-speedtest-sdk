@@ -1,0 +1,228 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../rmbt-sdk/0.1.2/rmbt-sdk-0.1.2.module",
+    "group": "tj.zehn.rmbt",
+    "module": "rmbt-sdk",
+    "version": "0.1.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.3.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "iosArm64ApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-darwin",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-network",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-network-tls",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.11.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.13.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-websockets",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-content-negotiation",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-serialization-kotlinx-json",
+          "version": {
+            "requires": "3.6.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "rmbt-sdk-iosArm64Main-0.1.2.klib",
+          "url": "rmbt-sdk-iosarm64-0.1.2.klib",
+          "size": 169161,
+          "sha512": "16a8068bf46d7c39e86b2c48cfa8cf305560cb9340f08734e541a93c65985aac39847bf55590f9c2a6aafadb5271bcec8ce3014a201fc209aec1e4295ad34de4",
+          "sha256": "d76b12b6ac5acce6a124f49d51030e3acc48813008c954c4021c59f2bccd0217",
+          "sha1": "a42eeb20fa1ebd443297df0002d3c81947726aa0",
+          "md5": "d62249e86c64f795f96952d7018692d5"
+        }
+      ]
+    },
+    {
+      "name": "iosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "files": [
+        {
+          "name": "rmbt-sdk-iosarm64-0.1.2-sources.jar",
+          "url": "rmbt-sdk-iosarm64-0.1.2-sources.jar",
+          "size": 25972,
+          "sha512": "f23ddd6c16a9facab8bc1f75b658eba2e1067ffabbef5a405a452e7c10c96270f64cbc05ecb797ae4dc0b1e47cfb0dab03a1c9c199d8984bf49f0b9c79c2285e",
+          "sha256": "f4e0b4d02e37f4a05ab73d367cf6b38619fe4687624e6a4304965e6fa0c8a70f",
+          "sha1": "facd0183830ecd093a322f5bed8927caf9904aea",
+          "md5": "8cb702de38af210a58a379edf475e698"
+        }
+      ]
+    },
+    {
+      "name": "iosArm64MetadataElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-darwin",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-network",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-network-tls",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.11.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.13.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-websockets",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-content-negotiation",
+          "version": {
+            "requires": "3.6.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-serialization-kotlinx-json",
+          "version": {
+            "requires": "3.6.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "rmbt-sdk-iosarm64-0.1.2-metadata.jar",
+          "url": "rmbt-sdk-iosarm64-0.1.2-metadata.jar",
+          "size": 3031,
+          "sha512": "82eab4c43f47b67d7ba68019f8a641621443db8f2b4cc25a1c1f1b85b295ba48c0c794e5a5b7361a7033da40797e671ae2001a77897634a79708cbe444aa2419",
+          "sha256": "084ee9ee5533c9398bb51e469eac1a41724154c0b25edf7f00852ac2d8936e50",
+          "sha1": "273e4ee512f2ecbc26150d2f784e148cabae8bd0",
+          "md5": "f3be900f29c01e571d59abbe19a59919"
+        }
+      ]
+    }
+  ]
+}
