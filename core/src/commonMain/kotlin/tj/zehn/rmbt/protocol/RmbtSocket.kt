@@ -2,7 +2,7 @@ package tj.zehn.rmbt.protocol
 
 import tj.zehn.rmbt.transport.Connection
 
-class RmbtSocket(private val connection: Connection, bufferSize: Int = 64 * 1024) {
+internal class RmbtSocket(private val connection: Connection, bufferSize: Int = 64 * 1024) {
     private val buffer = ByteArray(bufferSize)
     private var start = 0
     private var end = 0

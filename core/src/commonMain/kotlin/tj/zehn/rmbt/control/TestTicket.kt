@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TestTicket(
+internal data class TestTicket(
     @SerialName("test_uuid") val testUuid: String,
     @SerialName("test_token") val token: String,
     @SerialName("test_server_address") val host: String,

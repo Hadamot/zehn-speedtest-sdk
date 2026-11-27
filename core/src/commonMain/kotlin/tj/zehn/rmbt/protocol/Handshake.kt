@@ -3,7 +3,7 @@ package tj.zehn.rmbt.protocol
 private const val UPGRADE_REQUEST =
     "GET /rmbt HTTP/1.1\r\nConnection: Upgrade\r\nUpgrade: RMBT\r\nRMBT-Version: 1.2.0\r\n\r\n"
 
-suspend fun RmbtSocket.handshake(token: String, httpUpgrade: Boolean): ServerMessage.ChunkSize {
+internal suspend fun RmbtSocket.handshake(token: String, httpUpgrade: Boolean): ServerMessage.ChunkSize {
     if (httpUpgrade) upgrade()
     expect<ServerMessage.Version>()
     expect<ServerMessage.Accept>()

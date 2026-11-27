@@ -1,6 +1,6 @@
 package tj.zehn.rmbt.transport
 
-class RoutingConnector(private val socket: Connector?, private val webSocket: Connector) : Connector {
+internal class RoutingConnector(private val socket: Connector?, private val webSocket: Connector) : Connector {
     override suspend fun connect(endpoint: Endpoint): Connection =
         if (endpoint.transport.isWebSocket) {
             webSocket.connect(endpoint)
@@ -10,4 +10,4 @@ class RoutingConnector(private val socket: Connector?, private val webSocket: Co
         }
 }
 
-expect fun socketConnector(): Connector?
+internal expect fun socketConnector(): Connector?

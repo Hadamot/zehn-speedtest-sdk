@@ -11,7 +11,7 @@ import org.w3c.dom.WebSocket
 import tj.zehn.rmbt.Transport
 import tj.zehn.rmbt.protocol.RmbtException
 
-class NativeWebSocketConnector : Connector {
+internal class NativeWebSocketConnector : Connector {
     override suspend fun connect(endpoint: Endpoint): Connection {
         val scheme = if (endpoint.transport == Transport.SECURE_WEBSOCKET) "wss" else "ws"
         val socket = openWebSocket("$scheme://${endpoint.host}:${endpoint.port}/rmbt")

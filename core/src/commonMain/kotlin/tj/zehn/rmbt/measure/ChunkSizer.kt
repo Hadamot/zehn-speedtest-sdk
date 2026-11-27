@@ -2,7 +2,7 @@ package tj.zehn.rmbt.measure
 
 import tj.zehn.rmbt.protocol.ServerMessage
 
-object ChunkSizer {
+internal object ChunkSizer {
     const val MAX_CHUNK_SIZE = 256 * 1024
     private const val CHUNKS_PER_SECOND = 50
     private const val KIB = 1024

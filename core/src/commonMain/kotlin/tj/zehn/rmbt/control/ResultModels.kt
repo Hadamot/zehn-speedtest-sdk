@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResultRequest(
+internal data class ResultRequest(
     val platform: String,
     @SerialName("client_uuid") val clientUuid: String,
     @SerialName("client_name") val clientName: String = "RMBT",
@@ -32,14 +32,14 @@ data class ResultRequest(
 )
 
 @Serializable
-data class PingBody(
+internal data class PingBody(
     val value: Long,
     @SerialName("value_server") val valueServer: Long,
     @SerialName("time_ns") val timeNs: Long,
 )
 
 @Serializable
-data class SpeedBody(val direction: String, val thread: Int, val time: Long, val bytes: Long)
+internal data class SpeedBody(val direction: String, val thread: Int, val time: Long, val bytes: Long)
 
 @Serializable
-data class ErrorResponse(val error: List<String> = emptyList())
+internal data class ErrorResponse(val error: List<String> = emptyList())

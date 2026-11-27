@@ -3,9 +3,9 @@ package tj.zehn.rmbt.measure
 import tj.zehn.rmbt.protocol.RmbtSocket
 import tj.zehn.rmbt.protocol.ServerMessage
 
-data class Pretest(val chunks: Int, val chunkSize: Int)
+internal data class Pretest(val chunks: Int, val chunkSize: Int)
 
-suspend fun RmbtSocket.pretestDownload(
+internal suspend fun RmbtSocket.pretestDownload(
     limits: ServerMessage.ChunkSize,
     durationNanos: Long,
     clock: Clock,
@@ -26,7 +26,7 @@ suspend fun RmbtSocket.pretestDownload(
     return Pretest(chunks, ChunkSizer.choose(lastBytes, lastNanos, rttNanos, limits, maxChunkSize))
 }
 
-suspend fun RmbtSocket.pretestUpload(chunk: ByteArray, durationNanos: Long, clock: Clock) {
+internal suspend fun RmbtSocket.pretestUpload(chunk: ByteArray, durationNanos: Long, clock: Clock) {
     val end = clock.nanos() + durationNanos
     var chunks = 1
     do {

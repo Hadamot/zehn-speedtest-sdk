@@ -24,7 +24,7 @@ import tj.zehn.rmbt.transport.webSocketConnector
 import tj.zehn.rmbt.transport.socketConnector
 import kotlin.time.ExperimentalTime
 
-class RmbtClient(
+class RmbtClient internal constructor(
     private val config: RmbtConfig,
     private val httpClient: HttpClient = HttpClient { install(WebSockets) },
     private val connector: Connector = RoutingConnector(socketConnector(), webSocketConnector(httpClient)),

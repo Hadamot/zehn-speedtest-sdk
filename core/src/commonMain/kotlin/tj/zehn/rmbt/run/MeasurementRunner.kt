@@ -14,7 +14,7 @@ import tj.zehn.rmbt.measure.upload
 import tj.zehn.rmbt.transport.Connector
 import kotlin.random.Random
 
-class MeasurementRunner(
+internal class MeasurementRunner(
     private val connector: Connector,
     private val clock: Clock = MonotonicClock(),
     private val onEvent: (RmbtEvent) -> Unit = {},

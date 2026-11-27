@@ -1,3 +1,3 @@
 package tj.zehn.rmbt.transport
 
-actual fun socketConnector(): Connector? = SocketConnector()
+internal actual fun socketConnector(): Connector? = SocketConnector()

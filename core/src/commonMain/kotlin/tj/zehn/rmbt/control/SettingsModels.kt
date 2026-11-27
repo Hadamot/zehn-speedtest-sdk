@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SettingsRequest(
+internal data class SettingsRequest(
     val uuid: String?,
     val type: String,
     val name: String = "RMBT",
@@ -15,13 +15,13 @@ data class SettingsRequest(
 )
 
 @Serializable
-data class SettingsResponse(val settings: List<SettingsItem> = emptyList(), val error: List<String> = emptyList())
+internal data class SettingsResponse(val settings: List<SettingsItem> = emptyList(), val error: List<String> = emptyList())
 
 @Serializable
-data class SettingsItem(val uuid: String)
+internal data class SettingsItem(val uuid: String)
 
 @Serializable
-data class TestRequest(
+internal data class TestRequest(
     val uuid: String,
     val type: String,
     val language: String,

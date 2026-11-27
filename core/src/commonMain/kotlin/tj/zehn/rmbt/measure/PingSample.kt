@@ -1,8 +1,8 @@
 package tj.zehn.rmbt.measure
 
-data class PingSample(val clientNanos: Long, val serverNanos: Long, val startNanos: Long)
+internal data class PingSample(val clientNanos: Long, val serverNanos: Long, val startNanos: Long)
 
-fun List<PingSample>.medianServerNanos(): Long {
+internal fun List<PingSample>.medianServerNanos(): Long {
     require(isNotEmpty()) { "no pings" }
     val sorted = map { it.serverNanos }.sorted()
     val middle = sorted.size / 2

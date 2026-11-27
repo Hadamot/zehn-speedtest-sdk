@@ -1,6 +1,6 @@
 package tj.zehn.rmbt.protocol
 
-sealed class ClientCommand(vararg words: Any?) {
+internal sealed class ClientCommand(vararg words: Any?) {
     val line: String = words.filterNotNull().joinToString(" ") + "\n"
 
     class Token(token: String) : ClientCommand("TOKEN", token)

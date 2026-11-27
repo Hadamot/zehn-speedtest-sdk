@@ -7,7 +7,7 @@ import tj.zehn.rmbt.protocol.ServerMessage
 
 private const val DOWNLOAD_GRACE_MS = 3_000L
 
-suspend fun RmbtSocket.getChunks(chunks: Int, chunkSize: Int): Long {
+internal suspend fun RmbtSocket.getChunks(chunks: Int, chunkSize: Int): Long {
     expect<ServerMessage.Accept>()
     send(ClientCommand.GetChunks(chunks, chunkSize))
     receiveChunks(chunkSize) {}
@@ -15,7 +15,7 @@ suspend fun RmbtSocket.getChunks(chunks: Int, chunkSize: Int): Long {
     return expect<ServerMessage.Time>().nanos
 }
 
-suspend fun RmbtSocket.ping(clock: Clock): PingSample {
+internal suspend fun RmbtSocket.ping(clock: Clock): PingSample {
     expect<ServerMessage.Accept>()
     val start = clock.nanos()
     send(ClientCommand.Ping)
@@ -25,7 +25,7 @@ suspend fun RmbtSocket.ping(clock: Clock): PingSample {
     return PingSample(clientNanos, expect<ServerMessage.Time>().nanos, start)
 }
 
-suspend fun RmbtSocket.download(
+internal suspend fun RmbtSocket.download(
     seconds: Int,
     chunkSize: Int,
     clock: Clock,
@@ -47,7 +47,7 @@ suspend fun RmbtSocket.download(
     return Transfer(samples, completed = true)
 }
 
-suspend fun RmbtSocket.putNoResult(chunks: Int, chunk: ByteArray) {
+internal suspend fun RmbtSocket.putNoResult(chunks: Int, chunk: ByteArray) {
     expect<ServerMessage.Accept>()
     send(ClientCommand.PutNoResult(chunk.size))
     expect<ServerMessage.Ok>()

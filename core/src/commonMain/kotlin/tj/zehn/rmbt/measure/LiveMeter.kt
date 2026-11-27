@@ -7,7 +7,7 @@ import kotlin.concurrent.atomics.AtomicLongArray
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
 @OptIn(ExperimentalAtomicApi::class)
-class LiveMeter(
+internal class LiveMeter(
     threads: Int,
     private val phase: TestPhase,
     private val durationNanos: Long,

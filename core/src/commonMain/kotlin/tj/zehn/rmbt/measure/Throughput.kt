@@ -1,6 +1,6 @@
 package tj.zehn.rmbt.measure
 
-object Throughput {
+internal object Throughput {
     private val ORIGIN = Sample(0, 0)
 
     fun bitsPerSecond(threads: List<List<Sample>>): Double {

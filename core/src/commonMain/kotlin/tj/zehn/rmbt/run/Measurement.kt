@@ -4,7 +4,7 @@ import tj.zehn.rmbt.measure.PingSample
 import tj.zehn.rmbt.measure.Rate
 import tj.zehn.rmbt.measure.Sample
 
-data class Measurement(
+internal data class Measurement(
     val threads: Int,
     val download: Rate,
     val upload: Rate,

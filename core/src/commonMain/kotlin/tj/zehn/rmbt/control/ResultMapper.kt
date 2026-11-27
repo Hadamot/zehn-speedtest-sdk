@@ -3,7 +3,7 @@ package tj.zehn.rmbt.control
 import tj.zehn.rmbt.measure.Sample
 import tj.zehn.rmbt.run.Measurement
 
-object ResultMapper {
+internal object ResultMapper {
     private const val DETAIL_INTERVAL_NANOS = 100_000_000L
 
     fun map(

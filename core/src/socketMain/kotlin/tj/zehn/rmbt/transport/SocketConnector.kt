@@ -13,7 +13,7 @@ import io.ktor.utils.io.readAvailable
 import io.ktor.utils.io.writeFully
 import tj.zehn.rmbt.Transport
 
-class SocketConnector(private val selector: SelectorManager = SelectorManager()) : Connector {
+internal class SocketConnector(private val selector: SelectorManager = SelectorManager()) : Connector {
     override suspend fun connect(endpoint: Endpoint): Connection {
         val plain = aSocket(selector).tcp().connect(endpoint.host, endpoint.port) { noDelay = true }
         val socket = if (endpoint.transport == Transport.TLS) {

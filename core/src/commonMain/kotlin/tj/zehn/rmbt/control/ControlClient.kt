@@ -13,7 +13,7 @@ import kotlinx.serialization.json.Json
 
 class ControlServerException(errors: List<String>) : Exception("control server: ${errors.joinToString("; ")}")
 
-class ControlClient(
+internal class ControlClient(
     private val baseUrl: String,
     httpClient: HttpClient,
     private val apiKey: String? = null,

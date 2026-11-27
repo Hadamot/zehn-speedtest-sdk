@@ -3,7 +3,7 @@ package tj.zehn.rmbt.run
 import tj.zehn.rmbt.measure.ChunkSizer
 import tj.zehn.rmbt.transport.Endpoint
 
-data class TestParams(
+internal data class TestParams(
     val endpoint: Endpoint,
     val token: String,
     val threads: Int,

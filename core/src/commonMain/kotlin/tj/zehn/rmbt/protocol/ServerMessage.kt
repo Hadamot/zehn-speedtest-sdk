@@ -1,6 +1,6 @@
 package tj.zehn.rmbt.protocol
 
-sealed interface ServerMessage {
+internal sealed interface ServerMessage {
     data class Version(val value: String) : ServerMessage
     data class Accept(val commands: Set<String>) : ServerMessage
     data class ChunkSize(val size: Int, val min: Int, val max: Int) : ServerMessage

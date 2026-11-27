@@ -9,7 +9,7 @@ import io.ktor.websocket.Frame
 import io.ktor.websocket.close
 import tj.zehn.rmbt.Transport
 
-class WebSocketConnector(private val client: HttpClient) : Connector {
+internal class WebSocketConnector(private val client: HttpClient) : Connector {
     override suspend fun connect(endpoint: Endpoint): Connection {
         val session = client.webSocketSession {
             url {

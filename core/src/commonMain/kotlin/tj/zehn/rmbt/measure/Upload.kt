@@ -11,7 +11,7 @@ import tj.zehn.rmbt.protocol.UnexpectedMessageException
 private const val UPLOAD_GRACE_MS = 3_000L
 private const val NANOS_PER_SECOND = 1_000_000_000L
 
-suspend fun RmbtSocket.upload(seconds: Int, chunk: ByteArray, clock: Clock, onBytes: (Long) -> Unit): Transfer =
+internal suspend fun RmbtSocket.upload(seconds: Int, chunk: ByteArray, clock: Clock, onBytes: (Long) -> Unit): Transfer =
     coroutineScope {
         expect<ServerMessage.Accept>()
         send(ClientCommand.Put(chunk.size))
