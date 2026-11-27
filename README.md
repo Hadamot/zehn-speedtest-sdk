@@ -12,7 +12,7 @@ app ──► RmbtClient ──HTTP──► Control Server   (/settings, /testR
 |---|---|---|
 | Android (minSdk 24) | Maven `tj.zehn.rmbt:rmbt-sdk` | TCP, TLS, WebSocket |
 | JVM 17+ (backend, probes, CLI) | Maven `tj.zehn.rmbt:rmbt-sdk` | TCP, TLS, WebSocket |
-| iOS 15+ | Swift Package `RmbtSdk` | TCP, TLS, WebSocket |
+| iOS 16+ | Swift Package `RmbtSdk` (+ `RmbtSdkUI` screens) | WebSocket (default), TCP |
 | Browser, Node | npm `@hadamot/speedtest-sdk` | WebSocket |
 
 Current version: **0.1.2**.
@@ -89,7 +89,8 @@ bundled `ws` dependency.
 ### iOS (Swift Package Manager)
 
 File → Add Package Dependencies → `https://github.com/Hadamot/zehn-speedtest-sdk`,
-rule "Up to Next Major" from `0.1.2`, product **RmbtSdk**. No account or token needed.
+rule "Up to Next Major" from `0.1.2`, product **RmbtSdk** (and **RmbtSdkUI** for the ready-made
+screens, from 0.2.0). No account or token needed. iOS 16+ (the package required iOS 15 before 0.2.0).
 
 Manual alternative: download `RmbtSdk.xcframework.zip` from the GitHub Release, unzip
 and drag `RmbtSdk.xcframework` into the project (Embed & Sign).
@@ -143,6 +144,56 @@ val result = RmbtClient(RmbtConfig(tag = "probe-dushanbe-1")).run()
 println("↓ ${result.downloadMbps} ↑ ${result.uploadMbps} Mbit/s, ping ${result.pingMs} ms")
 ```
 
+### Android ready-made screens (`rmbt-sdk-ui`)
+
+Start screen, running test, result and history, copied from the NetCheck app
+(open-rmbt-android). Views + view binding, minSdk 24; includes `rmbt-sdk`.
+
+```kotlin
+dependencies {
+    implementation("tj.zehn.rmbt:rmbt-sdk-ui:<version>")
+}
+```
+
+```kotlin
+RmbtUi.configure(RmbtUiConfig(apiKey = "my-app"))   // optional: controlUrl, apiKey, tag, appName
+RmbtUi.start(context)                                // start screen + history with bottom navigation
+```
+
+Or embed `RmbtHomeFragment` / `RmbtHistoryFragment` in your own activity (any `FragmentActivity`,
+also a Compose one with `AndroidFragment`; the fragments bring their own theme and give the status
+bar back as they found it). `RmbtUi.startHistory(context)` opens the history as a screen of its own
+with a back arrow. A host with a floating bottom bar keeps the start screen's last test card above it:
+
+```kotlin
+AndroidFragment<RmbtHomeFragment>(onUpdate = { it.setContentBottomPadding(bottomBarHeightPx) })
+```
+
+An app that switches its language itself (not via the system or `AppCompatDelegate`) passes the same
+wrapper to the SDK screens: `RmbtUiConfig(wrapContext = { MyLocale.wrap(it) })`.
+
+**Test location on a map.** The result screen shows where the test ran: a Google map with the point
+and the coordinates. The SDK declares no location permission and no key; the host app opts in:
+
+```xml
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<application>
+    <meta-data android:name="com.google.android.geo.API_KEY" android:value="${mapsApiKey}" />
+</application>
+```
+
+With the permissions declared, the SDK asks for them when the user taps "Start" (turn off with
+`RmbtUiConfig(requestLocationPermission = false)` if the app asks itself); the test runs whatever the
+answer. The key needs "Maps SDK for Android" enabled in Google Cloud and should be restricted to the
+app's package and signing certificate. Without the permission the result says the location is unknown;
+without the key or Google Play services it shows the coordinates only. The point stays on the device,
+in the history; it is not sent to the Control Server.
+
+The history is stored on the device (SharedPreferences of the host app). All resources are prefixed
+`rmbt_`, so they never replace the host app's resources. Apps on Kotlin 2.2 or newer can use the SDK
+(it is built with Kotlin 2.3). Status, limitations and next steps: [docs/UI_SDK_TZ.md](docs/UI_SDK_TZ.md).
+
 ### iOS (Swift)
 
 ```swift
@@ -168,10 +219,66 @@ Task {
 client.cancel()
 ```
 
+Before **0.2.0** a failed test (anything but cancellation) terminated the app instead of throwing,
+and the default TCP+TLS transport never worked on iOS (ktor has no TLS sockets on Kotlin/Native):
+use 0.2.0+, where `run` throws and iOS defaults to a secure WebSocket.
+
 `RmbtClient()`, `RmbtClient(config:)`, `RmbtConfig()`, `RmbtConfig(controlUrl:apiKey:)`
 and `run(onEvent:)` require SDK **0.1.1+**; `RmbtClient()` alone targets the default backend. `RmbtConfig(controlUrl:apiKey:)` uses platform defaults. For more options use the full
 initializer; Kotlin default arguments are not visible in Swift, so pass every field
 (`Platform.shared` holds the defaults).
+
+### iOS ready-made screens (`RmbtSdkUI`)
+
+Start screen, running test (progress and speed gauges), result and history, ported from the NetCheck
+app (open-rmbt-ios) to SwiftUI; en/ru/tg. Product **RmbtSdkUI** of the same package, iOS 16+.
+
+```swift
+import RmbtSdkUI
+
+RmbtUI.configure(RmbtUiConfig(apiKey: "my-app"))   // optional: controlUrl, apiKey, tag, appName, language
+
+// SwiftUI: start screen + history in a tab bar
+RmbtSpeedtestView()
+// or one tab each (each brings its own NavigationStack)
+RmbtHomeView()
+RmbtHistoryView()
+
+// UIKit
+RmbtUI.present(from: viewController)                  // full screen, with a close button
+let controller = RmbtUI.makeViewController()          // to push or embed yourself
+```
+
+An app with its own `NavigationStack` per tab keeps the navigation and puts the screens in its stacks
+(as MyTelecom-iOS does):
+
+```swift
+NavigationStack(path: $path) {
+    RmbtStartView(onOpenResult: { path.append(Route.speedtestResult($0)) })   // keep the navigation bar
+        .navigationDestination(for: Route.self) { route in
+            if case let .speedtestResult(uuid) = route { RmbtResultView(testUuid: uuid) }
+        }
+}
+// history, pushed e.g. from a settings list
+RmbtHistoryListView(onOpenResult: { path.append(Route.speedtestResult($0)) })
+```
+
+The screens follow the system language among the languages the host app declares (it needs `ru.lproj`
+/ `tg.lproj` or the matching `CFBundleLocalizations`); an app that switches its language itself passes
+it: `RmbtUiConfig(language: "tg")`.
+
+**Test location on a map.** With `NSLocationWhenInUseUsageDescription` in the host's Info.plist the SDK
+asks for the location when the user taps "Start" (turn off with `requestLocationPermission: false` if
+the app asks itself); the test runs whatever the answer. The result then shows an Apple map with the
+point (no key needed). The point stays on the device, in the history; it is not sent to the Control Server.
+
+The history is stored on the device (`UserDefaults` suite `tj.zehn.rmbt.ui`, the same JSON as on
+Android). The Wi-Fi name and the signal level are not shown: iOS gives them only to apps with special
+entitlements. Demo app: `sample-ios/RmbtSample.swiftpm` (open in Xcode).
+
+An app referencing this folder as a local package (Xcode → Add Local…) uses the locally built core when
+`core/build/XCFrameworks/release/RmbtSdk.xcframework` exists (`./gradlew :rmbt-sdk:assembleRmbtSdkReleaseXCFramework`),
+otherwise the released one; set `RMBT_RELEASED_CORE=1` to force the release.
 
 ### Web (TypeScript)
 
@@ -215,7 +322,7 @@ during SSR. `RmbtWebOptions(controlUrl?, apiKey?, clientUuid?, threads?, duratio
 | `controlUrl` | `https://speedtest.tojiktelecom.tj/RMBTControlServer` | Control Server base URL (`RmbtConfig.DEFAULT_CONTROL_URL`) |
 | `apiKey` | `null` | Sent as `X-Api-Key` header on Control Server calls; identifies the source app at a gateway |
 | `clientUuid` | `null` | Stored client id; `null` registers a new client via `/settings` |
-| `transport` | JVM/Android/iOS `TCP`, JS `WEBSOCKET` | `TCP`/`TLS` or `WEBSOCKET`/`SECURE_WEBSOCKET`; encryption follows the server ticket |
+| `transport` | JVM/Android `TCP`, iOS and JS `WEBSOCKET` | `TCP`/`TLS` or `WEBSOCKET`/`SECURE_WEBSOCKET`; encryption follows the server ticket |
 | `threads` | from server | Parallel connections |
 | `durationSec` | from server | Download and upload duration each |
 | `tag` | `null` | Free label stored with the test (`test.tag`) |
@@ -305,8 +412,18 @@ RMBT_IT_CONTROL=http://localhost:18080/RMBTControlServer RMBT_IT_HOST=localhost 
 RMBT_IT_TRANSPORT=TCP ./gradlew :rmbt-sdk:jvmTest --tests '*EndToEndTest*' --rerun
 ```
 
+iOS screens (`ui-ios/`, Swift package `RmbtSdkUI`) against the locally built core:
+
+```bash
+./gradlew :rmbt-sdk:assembleRmbtSdkReleaseXCFramework
+xcodebuild -scheme RmbtSdk-Package \
+  -destination 'platform=iOS Simulator,name=iPhone 17' test      # unit tests
+# + TEST_RUNNER_RMBT_E2E=1: a real test against the default backend
+# + TEST_RUNNER_RMBT_SNAPSHOTS=/tmp/shots: renders the screens to PNG (en/ru/tg, dark, large text)
+```
+
 Layout (`core/src`): `commonMain` (protocol, measurement, control client, `RmbtClient`),
-`socketMain` (TCP/TLS for JVM, Android, iOS), `jsMain` (browser/Node WebSocket, JS API),
+`socketMain` (TCP/TLS for JVM and Android; plain TCP only on iOS), `jsMain` (browser/Node WebSocket, JS API),
 platform folders for defaults.
 
 ---
@@ -330,7 +447,7 @@ Versions are immutable: publish a new version for every change.
 - Not implemented: QoS tests (DNS, ports, traceroute, VoIP), signal and location
   collection, automatic network type detection.
 - TLS to measurement servers accepts any certificate on JVM/Android (self-signed
-  servers); iOS uses system trust.
+  servers); iOS tests over a secure WebSocket with system trust.
 - WebSocket chunks are capped at 32 KiB for `rmbtd` compatibility.
 
 ---
