@@ -1,9 +1,11 @@
 [versions]
-kotlin = "2.4.21"
+# Kotlin 2.3 so apps on Kotlin 2.2+ can read the SDK (a compiler reads metadata one version ahead);
+# the libraries below must not need a newer standard library either (serialization 1.11 = ktor 3.6).
+kotlin = "2.3.21"
 coroutines = "1.11.0"
-serialization = "1.13.0"
+serialization = "1.11.0"
 ktor = "3.6.1"
-agp = "9.1.1"
+agp = "9.2.1"
 
 [libraries]
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
