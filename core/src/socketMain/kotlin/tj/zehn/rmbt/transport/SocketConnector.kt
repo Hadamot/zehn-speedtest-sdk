@@ -11,18 +11,32 @@ import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.ByteWriteChannel
 import io.ktor.utils.io.readAvailable
 import io.ktor.utils.io.writeFully
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.withContext
 import tj.zehn.rmbt.Transport
 
-internal class SocketConnector(private val selector: SelectorManager = SelectorManager()) : Connector {
+/** TCP and TLS connections; [close] releases the selector and its threads. */
+internal class SocketConnector(private val selector: SelectorManager = SelectorManager()) : Connector, AutoCloseable {
     override suspend fun connect(endpoint: Endpoint): Connection {
-        val plain = aSocket(selector).tcp().connect(endpoint.host, endpoint.port) { noDelay = true }
+        // Resolving the host name blocks the thread.
+        val plain = withContext(Dispatchers.IO) {
+            aSocket(selector).tcp().connect(endpoint.host, endpoint.port) { noDelay = true }
+        }
         val socket = if (endpoint.transport == Transport.TLS) {
-            plain.tls(selector.coroutineContext) { acceptAnyCertificate() }
+            try {
+                plain.tls(selector.coroutineContext) { acceptAnyCertificate() }
+            } catch (error: Throwable) {
+                plain.close()
+                throw error
+            }
         } else {
             plain
         }
         return SocketConnection(plain, socket, socket.openReadChannel(), socket.openWriteChannel(autoFlush = false))
     }
+
+    override fun close() = selector.close()
 }
 
 internal expect fun TLSConfigBuilder.acceptAnyCertificate()
@@ -42,7 +56,10 @@ private class SocketConnection(
     override suspend fun flush() = output.flush()
 
     override suspend fun close() {
-        socket.close()
-        plain.close()
+        try {
+            socket.close()
+        } finally {
+            if (plain !== socket) plain.close()
+        }
     }
 }

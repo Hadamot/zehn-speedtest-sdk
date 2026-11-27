@@ -7,8 +7,11 @@ import tj.zehn.rmbt.Transport
 import tj.zehn.rmbt.measure.StepClock
 import tj.zehn.rmbt.transport.Endpoint
 import tj.zehn.rmbt.transport.FakeRmbtServer
+import tj.zehn.rmbt.transport.ScriptedConnection
+import tj.zehn.rmbt.transport.text
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFails
 import kotlin.test.assertTrue
 
 class MeasurementRunnerTest {
@@ -60,5 +63,16 @@ class MeasurementRunnerTest {
         runner.run(params(pretestNanos = 200_000_000))
 
         assertTrue(servers.all { it.closed })
+    }
+
+    @Test
+    fun aFailedHandshakeClosesTheConnection() = runTest {
+        // The server rejects the token.
+        val connection = ScriptedConnection(text("RMBTv1.2.0\n"), text("ACCEPT TOKEN QUIT\n"), text("ERR\n"))
+        val connector = tj.zehn.rmbt.transport.Connector { connection }
+
+        assertFails { connector.open(params(pretestNanos = 1)) }
+
+        assertTrue(connection.closed)
     }
 }

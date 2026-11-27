@@ -9,6 +9,7 @@ import org.w3c.dom.ARRAYBUFFER
 import org.w3c.dom.BinaryType
 import org.w3c.dom.WebSocket
 import tj.zehn.rmbt.Transport
+import tj.zehn.rmbt.protocol.ConnectionClosedException
 import tj.zehn.rmbt.protocol.RmbtException
 
 internal class NativeWebSocketConnector : Connector {
@@ -20,12 +21,22 @@ internal class NativeWebSocketConnector : Connector {
         val opened = CompletableDeferred<Unit>()
         socket.onopen = { opened.complete(Unit) }
         socket.onmessage = { event -> incoming.trySend(bytesOf(event.data)) }
-        socket.onerror = { opened.completeExceptionally(RmbtException("websocket error")) }
+        socket.onerror = {
+            val error = RmbtException("websocket error")
+            incoming.close(error)
+            opened.completeExceptionally(error)
+        }
         socket.onclose = {
             incoming.close()
             opened.completeExceptionally(RmbtException("websocket closed"))
         }
-        opened.await()
+        try {
+            opened.await()
+        } catch (error: Throwable) {
+            // Cancelled or failed while connecting: don't leave the browser's socket open.
+            socket.close()
+            throw error
+        }
         return NativeWebSocketConnection(socket, incoming)
     }
 
@@ -47,7 +58,9 @@ private class NativeWebSocketConnection(
 
     override suspend fun read(buffer: ByteArray, offset: Int, length: Int): Int {
         while (position == frame.size) {
-            frame = incoming.receiveCatching().getOrNull() ?: return -1
+            val received = incoming.receiveCatching()
+            received.exceptionOrNull()?.let { throw it }
+            frame = received.getOrNull() ?: return -1
             position = 0
         }
         val count = minOf(length, frame.size - position)
@@ -58,7 +71,11 @@ private class NativeWebSocketConnection(
 
     override suspend fun write(buffer: ByteArray, offset: Int, length: Int) {
         socket.send(buffer.copyOfRange(offset, offset + length).unsafeCast<Int8Array>())
-        while (socket.bufferedAmount.toInt() > MAX_BUFFERED_BYTES) delay(1)
+        while (socket.bufferedAmount.toInt() > MAX_BUFFERED_BYTES) {
+            // A closed socket never drains: stop waiting.
+            if (socket.readyState != WebSocket.OPEN) throw ConnectionClosedException()
+            delay(1)
+        }
     }
 
     override suspend fun flush() = Unit

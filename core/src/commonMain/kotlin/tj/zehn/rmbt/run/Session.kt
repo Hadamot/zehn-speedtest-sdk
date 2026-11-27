@@ -12,9 +12,15 @@ import tj.zehn.rmbt.transport.Connector
 
 internal class Session(val socket: RmbtSocket, val limits: ServerMessage.ChunkSize)
 
+/** Connects and shakes hands; a failed handshake (wrong token, dropped connection) closes the connection. */
 internal suspend fun Connector.open(params: TestParams): Session {
     val socket = RmbtSocket(connect(params.endpoint))
-    return Session(socket, socket.handshake(params.token, params.httpUpgrade))
+    return try {
+        Session(socket, socket.handshake(params.token, params.httpUpgrade))
+    } catch (error: Throwable) {
+        withContext(NonCancellable) { runCatching { socket.close() } }
+        throw error
+    }
 }
 
 internal suspend fun Session.close() = withContext(NonCancellable) { runCatching { socket.close() } }

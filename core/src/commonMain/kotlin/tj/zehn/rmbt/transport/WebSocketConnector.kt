@@ -30,7 +30,10 @@ private class WebSocketConnection(private val session: DefaultClientWebSocketSes
 
     override suspend fun read(buffer: ByteArray, offset: Int, length: Int): Int {
         while (position == frame.size) {
-            val next = session.incoming.receiveCatching().getOrNull() ?: return -1
+            val received = session.incoming.receiveCatching()
+            // A network failure closes the channel with its cause: report that, not a plain end of stream.
+            received.exceptionOrNull()?.let { throw it }
+            val next = received.getOrNull() ?: return -1
             if (next is Frame.Binary || next is Frame.Text) {
                 frame = next.data
                 position = 0
