@@ -6,9 +6,16 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.headersOf
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withTimeout
 import tj.zehn.rmbt.measure.StepClock
+import tj.zehn.rmbt.transport.Connection
+import tj.zehn.rmbt.transport.Connector
+import tj.zehn.rmbt.transport.Endpoint
 import tj.zehn.rmbt.transport.FakeRmbtServer
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -21,7 +28,10 @@ class RmbtClientTest {
         "test_server_type":"RMBThttp","test_server_name":"Local","test_duration":"1","test_numthreads":"2",
         "test_numpings":"3","test_wait":0,"open_test_uuid":"O1","error":[]}"""
 
-    private fun client(resultBody: String = """{"error":[]}"""): RmbtClient {
+    private fun client(
+        resultBody: String = """{"error":[]}""",
+        connector: Connector = Connector { FakeRmbtServer(httpUpgrade = true) },
+    ): RmbtClient {
         val engine = MockEngine { request ->
             val path = request.url.encodedPath.substringAfterLast('/')
             paths += path
@@ -35,7 +45,7 @@ class RmbtClientTest {
         return RmbtClient(
             config = RmbtConfig(controlUrl = "http://control/RMBTControlServer", transport = Transport.TCP),
             httpClient = HttpClient(engine),
-            connector = { FakeRmbtServer(httpUpgrade = true) },
+            connector = connector,
             clock = StepClock(500_000_000),
         )
     }
@@ -74,5 +84,44 @@ class RmbtClientTest {
 
         assertIs<RmbtEvent.Finished>(events.last())
         assertTrue(events.any { it is RmbtEvent.Phase })
+    }
+
+    @Test
+    fun cancelStopsTheRunningTest() = runTest {
+        val connecting = CompletableDeferred<Unit>()
+        val hanging = Connector {
+            connecting.complete(Unit)
+            awaitCancellation()
+        }
+        val client = client(connector = hanging)
+        val collecting = launch { runCatching { client.start().toList() } }
+
+        connecting.await()
+        client.cancel()
+
+        // The test runs on Dispatchers.Default: wait in real time, not in the test's virtual time.
+        kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Default) {
+            withTimeout(5_000) { collecting.join() }
+        }
+    }
+
+    @Test
+    fun closeClosesTheConnectorAndTheHttpClient() {
+        val connector = ClosableConnector()
+        val client = client(connector = connector)
+
+        client.close()
+
+        assertTrue(connector.closed)
+    }
+
+    private class ClosableConnector : Connector, AutoCloseable {
+        var closed = false
+
+        override suspend fun connect(endpoint: Endpoint): Connection = awaitCancellation()
+
+        override fun close() {
+            closed = true
+        }
     }
 }
