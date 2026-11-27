@@ -5,10 +5,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class TestTicket(
-    @SerialName("test_uuid") val testUuid: String,
-    @SerialName("test_token") val token: String,
-    @SerialName("test_server_address") val host: String,
-    @SerialName("test_server_port") val port: Int,
+    // Defaults so that an error-only answer ({"error": [...]}) decodes and its message reaches the app.
+    @SerialName("test_uuid") val testUuid: String = "",
+    @SerialName("test_token") val token: String = "",
+    @SerialName("test_server_address") val host: String = "",
+    @SerialName("test_server_port") val port: Int = 0,
     @SerialName("test_server_encryption") val encrypted: Boolean = false,
     @SerialName("test_server_type") val serverType: String = "RMBT",
     @SerialName("test_server_name") val serverName: String = "",
@@ -34,7 +35,18 @@ internal data class TestTicket(
         val openTestUuid: String? = null,
     )
 
-    fun parsed() = Parsed(
+    fun parsed(): Parsed {
+        if (testUuid.isEmpty() || token.isEmpty() || host.isEmpty() || port <= 0) {
+            throw ControlServerException(listOf("incomplete test ticket"))
+        }
+        return toParsed()
+    }
+
+    /** The ticket's numbers come as strings; a bad one is the server's error, not a crash. */
+    private fun number(name: String, value: String): Int =
+        value.toIntOrNull() ?: throw ControlServerException(listOf("bad $name: $value"))
+
+    private fun toParsed() = Parsed(
         testUuid = testUuid,
         token = token,
         host = host,
@@ -42,9 +54,9 @@ internal data class TestTicket(
         encrypted = encrypted,
         httpUpgrade = serverType == "RMBThttp",
         serverName = serverName,
-        durationSec = duration.toInt(),
-        threads = threads.toInt(),
-        pings = pings.toInt(),
+        durationSec = number("test_duration", duration),
+        threads = number("test_numthreads", threads),
+        pings = number("test_numpings", pings),
         waitSec = waitSec,
         openTestUuid = openTestUuid,
     )

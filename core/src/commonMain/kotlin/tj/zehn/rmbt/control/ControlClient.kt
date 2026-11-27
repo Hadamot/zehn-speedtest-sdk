@@ -8,17 +8,20 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import io.ktor.http.isSuccess
+import tj.zehn.rmbt.protocol.RmbtException
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-class ControlServerException(errors: List<String>) : Exception("control server: ${errors.joinToString("; ")}")
+/** The Control Server refused a request or answered with something that isn't a valid answer. */
+class ControlServerException(errors: List<String>) : RmbtException("control server: ${errors.joinToString("; ")}")
 
 internal class ControlClient(
     private val baseUrl: String,
     httpClient: HttpClient,
     private val apiKey: String? = null,
     private val client: ClientInfo = ClientInfo(),
-) {
+) : AutoCloseable {
     private val http = httpClient.config { install(ContentNegotiation) { json(JSON) } }
 
     suspend fun register(clientUuid: String?): String {
@@ -47,12 +50,22 @@ internal class ControlClient(
         failOn(post<ResultRequest, ErrorResponse>("result", result).error)
     }
 
-    private suspend inline fun <reified T, reified R> post(path: String, payload: T): R =
-        http.post("$baseUrl/$path") {
+    private suspend inline fun <reified T, reified R> post(path: String, payload: T): R {
+        val response = http.post("${baseUrl.trimEnd('/')}/$path") {
             contentType(ContentType.Application.Json)
             apiKey?.let { header(API_KEY_HEADER, it) }
             setBody(payload)
-        }.body()
+        }
+        if (!response.status.isSuccess()) {
+            // RMBT servers put their reasons in the usual error list; a proxy or gateway answers with a page.
+            val errors = runCatching { response.body<ErrorResponse>().error }.getOrNull().orEmpty()
+            throw ControlServerException(errors.ifEmpty { listOf("HTTP ${response.status.value}") })
+        }
+        return response.body()
+    }
+
+    /** Closes the client this one derived from the given one (`config` shares the engine, which stays open). */
+    override fun close() = http.close()
 
     private fun failOn(errors: List<String>) {
         if (errors.isNotEmpty()) throw ControlServerException(errors)

@@ -17,10 +17,15 @@ import kotlin.test.assertTrue
 class ControlClientTest {
     private val requests = mutableListOf<HttpRequestData>()
 
-    private fun client(body: String, apiKey: String? = null): ControlClient {
+    private fun client(
+        body: String,
+        apiKey: String? = null,
+        status: io.ktor.http.HttpStatusCode = io.ktor.http.HttpStatusCode.OK,
+        contentType: ContentType = ContentType.Application.Json,
+    ): ControlClient {
         val engine = MockEngine { request ->
             requests += request
-            respond(body, headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()))
+            respond(body, status, headers = headersOf(HttpHeaders.ContentType, contentType.toString()))
         }
         return ControlClient("http://control/RMBTControlServer", HttpClient(engine), apiKey)
     }
@@ -53,6 +58,50 @@ class ControlClientTest {
         client("""{"settings":[{"uuid":"c-1"}]}""", apiKey = "secret").register(null)
 
         assertEquals("secret", requests.single().headers["X-Api-Key"])
+    }
+
+    @Test
+    fun requestTestReportsTheServersErrorInsteadOfAMissingField() = runTest {
+        val error = assertFailsWith<ControlServerException> {
+            client("""{"error":["Client is blocked"]}""").requestTest("c-1", threads = null)
+        }
+
+        assertTrue(error.message!!.contains("Client is blocked"), error.message)
+    }
+
+    @Test
+    fun anIncompleteTicketIsAControlServerError() = runTest {
+        val ticket = client("""{"test_uuid":"t-1","error":[]}""").requestTest("c-1", threads = null)
+
+        assertFailsWith<ControlServerException> { ticket.parsed() }
+    }
+
+    @Test
+    fun aGatewayErrorPageIsAControlServerErrorWithItsStatus() = runTest {
+        val error = assertFailsWith<ControlServerException> {
+            client("<html>Bad Gateway</html>", status = io.ktor.http.HttpStatusCode.BadGateway, contentType = ContentType.Text.Html)
+                .register(null)
+        }
+
+        assertTrue(error.message!!.contains("502"), error.message)
+    }
+
+    @Test
+    fun aRefusalWithAnErrorStatusKeepsTheServersReasons() = runTest {
+        val error = assertFailsWith<ControlServerException> {
+            client("""{"error":["Client is blocked"]}""", status = io.ktor.http.HttpStatusCode.Forbidden).register(null)
+        }
+
+        assertTrue(error.message!!.contains("Client is blocked"), error.message)
+    }
+
+    @Test
+    fun aTicketNumberThatIsNotOneIsAControlServerError() = runTest {
+        val body = """{"test_uuid":"t-1","test_token":"x","test_server_address":"h","test_server_port":1,
+            "test_duration":"seven","error":[]}"""
+        val ticket = client(body).requestTest("c-1", threads = null)
+
+        assertFailsWith<ControlServerException> { ticket.parsed() }
     }
 
     @Test

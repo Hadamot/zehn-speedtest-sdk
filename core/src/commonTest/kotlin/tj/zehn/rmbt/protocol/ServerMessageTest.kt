@@ -41,7 +41,7 @@ class ServerMessageTest {
 
     @Test
     fun rejectsUnknownLine() {
-        assertFailsWith<IllegalArgumentException> { ServerMessage.parse("HELLO") }
+        assertFailsWith<MalformedMessageException> { ServerMessage.parse("HELLO") }
     }
 }
 
@@ -49,5 +49,12 @@ class LegacyChunkSizeTest {
     @Test
     fun parsesSingleValueChunkSizeOfOldServers() {
         assertEquals(ServerMessage.ChunkSize(4096, 4096, 4096), ServerMessage.parse("CHUNKSIZE 4096"))
+    }
+
+    @Test
+    fun aNumberThatIsNotOneIsAProtocolError() {
+        kotlin.test.assertFailsWith<MalformedMessageException> { ServerMessage.parse("CHUNKSIZE 4096 x 8192") }
+        kotlin.test.assertFailsWith<MalformedMessageException> { ServerMessage.parse("TIME 12a") }
+        kotlin.test.assertFailsWith<MalformedMessageException> { ServerMessage.parse("HELLO") }
     }
 }
