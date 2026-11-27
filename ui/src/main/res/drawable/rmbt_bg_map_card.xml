@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Rounded panel under the result map; the map is clipped to it (clipToOutline). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/rmbt_last_test_card_background" />
+    <corners android:radius="@dimen/rmbt_result_map_corner" />
+</shape>

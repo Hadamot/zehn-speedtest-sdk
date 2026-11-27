@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copied from open-rmbt-android (item_history_header.xml). -->
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/rmbt_padding_extra_large"
+        android:paddingTop="@dimen/rmbt_padding_medium"
+        android:contentDescription="@string/rmbt_history_list_header_container"
+        android:paddingEnd="@dimen/rmbt_padding_large"
+        android:paddingBottom="@dimen/rmbt_padding_medium">
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/rmbt_RobotoRegularStyle.VerySmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/rmbt_margin_24"
+            android:layout_weight="2"
+            android:text="@string/rmbt_history_item_header_test"
+            android:contentDescription="@string/rmbt_history_list_header_date"
+            android:textColor="@color/rmbt_text_gray_transparency_60" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/rmbt_padding_medium"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/rmbt_RobotoRegularStyle.VerySmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="@dimen/rmbt_history_label_text_size"
+                app:autoSizeMaxTextSize="12sp"
+                android:text="@string/rmbt_history_item_header_down"
+                android:contentDescription="@string/rmbt_history_list_header_download_speed"
+                android:textColor="@color/rmbt_text_gray_transparency_60" />
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/rmbt_RobotoRegularStyle.VerySmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rmbt_speed_progress_units"
+                android:contentDescription="@string/rmbt_history_list_header_download_speed_units"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                android:textSize="@dimen/rmbt_history_label_text_size" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/rmbt_margin_small"
+            android:paddingStart="@dimen/rmbt_padding_medium"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/rmbt_RobotoRegularStyle.VerySmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="@dimen/rmbt_history_label_text_size"
+                app:autoSizeMaxTextSize="12sp"
+                android:text="@string/rmbt_history_item_header_up"
+                android:contentDescription="@string/rmbt_history_list_header_upload_speed"
+                android:textColor="@color/rmbt_text_gray_transparency_60" />
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/rmbt_RobotoRegularStyle.VerySmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rmbt_speed_progress_units"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                android:contentDescription="@string/rmbt_history_list_header_upload_speed_units"
+                android:textSize="@dimen/rmbt_history_label_text_size" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/rmbt_margin_small"
+            android:paddingStart="@dimen/rmbt_padding_medium"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/rmbt_RobotoRegularStyle.VerySmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="@dimen/rmbt_history_label_text_size"
+                app:autoSizeMaxTextSize="12sp"
+                android:text="@string/rmbt_history_item_header_ping"
+                android:contentDescription="@string/rmbt_history_list_header_ping"
+                android:textColor="@color/rmbt_text_gray_transparency_60" />
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/rmbt_RobotoRegularStyle.VerySmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rmbt_history_item_header_ms"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                android:contentDescription="@string/rmbt_history_list_header_ping_units"
+                android:textSize="@dimen/rmbt_history_label_text_size" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>

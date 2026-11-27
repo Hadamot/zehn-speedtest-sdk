@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="175dp"
+    android:height="36dp"
+    android:viewportWidth="1174"
+    android:viewportHeight="242">
+    <!-- Temporary NetCheck logo, white version for the blue home screen (until the final artwork arrives) -->
+    <group
+        android:translateX="-14"
+        android:translateY="-27">
+        <path
+            android:pathData="M140 40V87"
+            android:strokeWidth="22"
+            android:strokeColor="#FFFFFF"
+            android:strokeLineCap="round" />
+        <path
+            android:pathData="M191 101L224 59"
+            android:strokeWidth="22"
+            android:strokeColor="#FFFFFF"
+            android:strokeLineCap="round" />
+        <path
+            android:pathData="M63 73L90 105"
+            android:strokeWidth="22"
+            android:strokeColor="#FFFFFF"
+            android:strokeLineCap="round" />
+        <path
+            android:pathData="M27 139L59 148"
+            android:strokeWidth="22"
+            android:strokeColor="#FFFFFF"
+            android:strokeLineCap="round" />
+        <path
+            android:pathData="M36 210L61 202"
+            android:strokeWidth="22"
+            android:strokeColor="#FFFFFF"
+            android:strokeLineCap="round" />
+        <path
+            android:pathData="M222 148L281 130"
+            android:strokeWidth="24"
+            android:strokeAlpha="0.45"
+            android:strokeColor="#FFFFFF"
+            android:strokeLineCap="round" />
+        <path
+            android:pathData="M220 202L285 226"
+            android:strokeWidth="24"
+            android:strokeAlpha="0.45"
+            android:strokeColor="#FFFFFF"
+            android:strokeLineCap="round" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M133.703 168.097L146.303 177.897L187.603 116.197L184.403 113.797L133.703 168.097Z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M140 193C151.046 193 160 184.046 160 173C160 161.954 151.046 153 140 153C128.954 153 120 161.954 120 173C120 184.046 128.954 193 140 193Z" />
+    </group>
+    <!-- "NetCheck", Roboto Bold (res/font/roboto_bold.ttf, Apache 2.0) converted to outlines -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M469.1 187H441.9L389 100.1V187H361.8V55H389L442 142V55H469.1ZM536.3 188.8Q514.7 188.8 501.2 175.6Q487.6 162.3 487.6 140.3V137.8Q487.6 123 493.3 111.3Q499 99.7 509.5 93.4Q520 87.1 533.4 87.1Q553.5 87.1 565.1 99.8Q576.6 112.5 576.6 135.8V146.5H514.2Q515.5 156.1 521.8 161.9Q528.2 167.7 538 167.7Q553.2 167.7 561.7 156.7L574.6 171.1Q568.7 179.5 558.6 184.1Q548.5 188.8 536.3 188.8ZM533.3 108.3Q525.5 108.3 520.7 113.6Q515.8 118.8 514.5 128.6H550.9V126.5Q550.7 117.8 546.2 113.1Q541.7 108.3 533.3 108.3ZM622.9 64.8V88.9H639.7V108.1H622.9V157.1Q622.9 162.5 625 164.9Q627.1 167.2 632.9 167.2Q637.3 167.2 640.7 166.6V186.5Q632.9 188.8 624.8 188.8Q597.2 188.8 596.7 161V108.1H582.4V88.9H596.7V64.8ZM759.6 143Q758.1 164.3 743.9 176.6Q729.7 188.8 706.5 188.8Q681.1 188.8 666.5 171.7Q652 154.6 652 124.8V116.7Q652 97.7 658.7 83.2Q665.4 68.7 677.9 60.9Q690.3 53.2 706.8 53.2Q729.7 53.2 743.6 65.4Q757.6 77.7 759.8 99.8H732.6Q731.6 87 725.5 81.2Q719.3 75.5 706.8 75.5Q693.2 75.5 686.5 85.2Q679.7 95 679.5 115.5V125.4Q679.5 146.8 686 156.7Q692.5 166.6 706.5 166.6Q719.1 166.6 725.3 160.8Q731.5 155.1 732.4 143ZM801.3 99.6Q811.7 87.1 827.5 87.1Q859.4 87.1 859.9 124.2V187H833.7V124.9Q833.7 116.5 830 112.4Q826.4 108.4 818 108.4Q806.5 108.4 801.3 117.3V187H775.1V47.7H801.3ZM924.8 188.8Q903.2 188.8 889.6 175.6Q876.1 162.3 876.1 140.3V137.8Q876.1 123 881.8 111.3Q887.5 99.7 898 93.4Q908.5 87.1 921.9 87.1Q942 87.1 953.6 99.8Q965.1 112.5 965.1 135.8V146.5H902.7Q903.9 156.1 910.3 161.9Q916.7 167.7 926.5 167.7Q941.6 167.7 950.2 156.7L963 171.1Q957.1 179.5 947.1 184.1Q937 188.8 924.8 188.8ZM921.8 108.3Q914 108.3 909.1 113.6Q904.3 118.8 902.9 128.6H939.4V126.5Q939.2 117.8 934.7 113.1Q930.1 108.3 921.8 108.3ZM1020.8 167.7Q1028 167.7 1032.6 163.7Q1037.1 159.7 1037.3 153.1H1061.9Q1061.8 163.1 1056.4 171.4Q1051.1 179.7 1041.8 184.2Q1032.5 188.8 1021.2 188.8Q1000.2 188.8 988.1 175.4Q975.9 162.1 975.9 138.5V136.8Q975.9 114.1 988 100.6Q1000 87.1 1021.1 87.1Q1039.5 87.1 1050.6 97.6Q1061.7 108 1061.9 125.4H1037.3Q1037.1 117.8 1032.6 113.1Q1028 108.3 1020.6 108.3Q1011.5 108.3 1006.8 115Q1002.1 121.6 1002.1 136.6V139.3Q1002.1 154.5 1006.7 161.1Q1011.4 167.7 1020.8 167.7ZM1112.4 147.7 1103 157.1V187H1076.8V47.7H1103V124.9L1108.1 118.4L1133.2 88.9H1164.7L1129.2 129.8L1167.7 187H1137.6Z" />
+</vector>

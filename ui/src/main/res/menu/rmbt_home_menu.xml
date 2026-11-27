@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Start screen and history only (open-rmbt-android also has statistics and map). -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/rmbt_navigation_home"
+        android:contentDescription="@string/rmbt_home_home"
+        android:icon="@drawable/rmbt_ic_menu_home"
+        android:title="@string/rmbt_menu_button_title_page" />
+    <item
+        android:id="@+id/rmbt_navigation_history"
+        android:contentDescription="@string/rmbt_home_history"
+        android:icon="@drawable/rmbt_ic_menu_history"
+        android:title="@string/rmbt_menu_button_history" />
+</menu>

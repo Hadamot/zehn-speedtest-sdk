@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copied from open-rmbt-android; names prefixed with rmbt_. -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string-array name="rmbt_measurement_speed_chart_y_labels">
+        <item>1M</item>
+        <item>10M</item>
+        <item>100M</item>
+        <item>1G</item>
+        <item>10G</item>
+    </string-array>
+    <color name="rmbt_blackRipple">#26000000</color>
+    <color name="rmbt_chart_grid_line_color">#3D3D3D</color>
+    <color name="rmbt_chart_labels_color">#8CFFFFFF</color>
+    <color name="rmbt_classification_green">#2E9BEE</color>
+    <color name="rmbt_classification_green_dark">#0D5D9B</color>
+    <color name="rmbt_classification_red">#cf0c0c</color>
+    <color name="rmbt_classification_undefined">#AEACAC</color>
+    <color name="rmbt_classification_yellow">#FFBD0C</color>
+    <color name="rmbt_colorAccent">#0072EF</color>
+    <color name="rmbt_colorPrimary">@android:color/white</color>
+    <color name="rmbt_colorPrimaryDark">@android:color/white</color>
+    <color name="rmbt_colorSelector">#550072EF</color>
+    <color name="rmbt_greenRipple">#420072EF</color>
+    <color name="rmbt_horizontal_divider">#eeeeee</color>
+    <color name="rmbt_last_test_card_background">#F2F4F7</color>
+    <color name="rmbt_measurement_bottom_background">#282828</color>
+    <color name="rmbt_measurement_dark_gray">#222222</color>
+    <color name="rmbt_measurement_green">#0072EF</color>
+    <color name="rmbt_measurement_green_dark">#004787</color>
+    <color name="rmbt_measurement_not_progressed">#7a7a7a</color>
+    <color name="rmbt_measurement_progress_inner">#cccccc</color>
+    <color name="rmbt_measurement_scale">#3a3a3a</color>
+    <color name="rmbt_measurement_text">#848484</color>
+    <color name="rmbt_navigation_gray">#545454</color>
+    <color name="rmbt_navigation_green">@color/rmbt_colorAccent</color>
+    <color name="rmbt_rating_meter_empty">#1F000000</color>
+    <color name="rmbt_speed_chart_progress_fill_color">#4D0072EF</color>
+    <color name="rmbt_text_black_transparency_40">#66000000</color>
+    <color name="rmbt_text_dark_gray">#424242</color>
+    <color name="rmbt_text_gray">#545454</color>
+    <color name="rmbt_text_gray_transparency_40">#66424242</color>
+    <color name="rmbt_text_gray_transparency_60">#99424242</color>
+    <color name="rmbt_text_white_transparency_40">#66FFFFFF</color>
+    <color name="rmbt_text_white_transparency_50">#8CFFFFFF</color>
+    <color name="rmbt_text_white_transparency_80">#CCFFFFFF</color>
+    <color name="rmbt_toolbar_gray">#F2F3F5</color>
+    <color name="rmbt_wave_primary">@android:color/white</color>
+    <color name="rmbt_wave_secondary">#33FFFFFF</color>
+    <declare-styleable name="rmbt_LineChart">
+        <attr name="rmbt_grid_color" format="color" />
+        <attr name="rmbt_ylabel_color" format="color" />
+        <attr name="rmbt_xlabel_color" format="color" />
+        <attr name="rmbt_ylabel_text_size" format="dimension" />
+        <attr name="rmbt_xlabel_text_size" format="dimension" />
+        <attr name="rmbt_grid_row" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="rmbt_SpeedLineChart">
+        <attr name="rmbt_progress_line_color" format="color" />
+        <attr name="rmbt_progress_fill_color" format="color" />
+    </declare-styleable>
+    <dimen name="rmbt_chart_label_text_size">11sp</dimen>
+    <dimen name="rmbt_history_empty_icon_size">64dp</dimen>
+    <dimen name="rmbt_history_image_size">24dp</dimen>
+    <dimen name="rmbt_history_label_text_size">10sp</dimen>
+    <dimen name="rmbt_home_brand_logo_height">36dp</dimen>
+    <dimen name="rmbt_home_last_test_card_min_height">64dp</dimen>
+    <dimen name="rmbt_inset_small">4dp</dimen>
+    <dimen name="rmbt_inset_very_small">2dp</dimen>
+    <dimen name="rmbt_margin_24">24dp</dimen>
+    <dimen name="rmbt_margin_large">16dp</dimen>
+    <dimen name="rmbt_margin_medium">8dp</dimen>
+    <dimen name="rmbt_margin_small">4dp</dimen>
+    <dimen name="rmbt_measurement_bottom_header_height">56dp</dimen>
+    <dimen name="rmbt_network_label_size">14sp</dimen>
+    <dimen name="rmbt_network_name_size">20sp</dimen>
+    <dimen name="rmbt_padding_extra_large">24dp</dimen>
+    <dimen name="rmbt_padding_large">16dp</dimen>
+    <dimen name="rmbt_padding_medium">8dp</dimen>
+    <dimen name="rmbt_padding_medium_large">12dp</dimen>
+    <dimen name="rmbt_padding_small">4dp</dimen>
+    <dimen name="rmbt_padding_very_small">2dp</dimen>
+    <dimen name="rmbt_result_verdict_meter_width">160dp</dimen>
+    <dimen name="rmbt_result_map_height">180dp</dimen>
+    <dimen name="rmbt_result_map_corner">16dp</dimen>
+    <dimen name="rmbt_signal_bar_scale_value">10sp</dimen>
+    <dimen name="rmbt_signal_bar_start_margin">16dp</dimen>
+    <dimen name="rmbt_signal_bar_top_margin">56dp</dimen>
+    <dimen name="rmbt_speed_chart_height">128dp</dimen>
+    <dimen name="rmbt_toolbar_button_size">48dp</dimen>
+    <string name="rmbt_bottom_navigation_area">Bottom navigation area</string>
+    <string name="rmbt_content_label_close">Close</string>
+    <string name="rmbt_history_item_header_down">Down</string>
+    <string name="rmbt_history_item_header_ms">ms</string>
+    <string name="rmbt_history_item_header_ping">Ping</string>
+    <string name="rmbt_history_item_header_test">Date</string>
+    <string name="rmbt_history_item_header_up">Up</string>
+    <string name="rmbt_history_list_header_container">History list header container</string>
+    <string name="rmbt_history_list_header_date">History list header: date</string>
+    <string name="rmbt_history_list_header_download_speed">History list header: download speed</string>
+    <string name="rmbt_history_list_header_download_speed_units">History list header: download speed units: Mbit/s </string>
+    <string name="rmbt_history_list_header_ping">History list header: ping</string>
+    <string name="rmbt_history_list_header_ping_units">History list header: ping units: milliseconds </string>
+    <string name="rmbt_history_list_header_upload_speed">History list header: upload speed</string>
+    <string name="rmbt_history_list_header_upload_speed_units">History list header: upload speed units: Mbit/s </string>
+    <string name="rmbt_history_no_data">No data available.</string>
+    <string name="rmbt_history_no_data_hint">Your tests will appear here. Start the first test on the home screen.</string>
+    <string name="rmbt_history_today">Today</string>
+    <string name="rmbt_history_yesterday">Yesterday</string>
+    <string name="rmbt_home_ethernet" translatable="false">Ethernet</string>
+    <string name="rmbt_home_history">Main navigation: History</string>
+    <string name="rmbt_home_home">Main navigation: Home</string>
+    <string name="rmbt_home_last_test_empty">Your test results will appear here.</string>
+    <string name="rmbt_home_last_test_title">Last test</string>
+    <string name="rmbt_home_no_internet_connection">No Internet connection!</string>
+    <string name="rmbt_home_no_internet_connection_details">No test is possible.</string>
+    <string name="rmbt_home_signal_quality_excellent">Excellent signal</string>
+    <string name="rmbt_home_signal_quality_fair">Fair signal</string>
+    <string name="rmbt_home_signal_quality_good">Good signal</string>
+    <string name="rmbt_home_signal_quality_weak">Weak signal, results may be lower</string>
+    <string name="rmbt_home_start_measurement">Start measurement</string>
+    <string name="rmbt_home_start_test_info">Press the button to start the test now!</string>
+    <string name="rmbt_home_wifi">WLAN</string>
+    <string name="rmbt_input_setting_dialog_ok">OK</string>
+    <string name="rmbt_label_download">Download</string>
+    <string name="rmbt_label_init">Init</string>
+    <string name="rmbt_label_ping">Ping</string>
+    <string name="rmbt_label_qos">QoS</string>
+    <string name="rmbt_label_upload">Upload</string>
+    <string name="rmbt_map_legend_unit_ms">ms</string>
+    <string name="rmbt_measurement_cancel">Cancel</string>
+    <string name="rmbt_measurement_dash">-</string>
+    <string name="rmbt_measurement_down">Down</string>
+    <string name="rmbt_measurement_download">Download</string>
+    <string name="rmbt_measurement_download_upload_speed">%1$s Mbit/s</string>
+    <string name="rmbt_measurement_phase_download_hint">Checking how fast data reaches your device</string>
+    <string name="rmbt_measurement_phase_init">Connecting</string>
+    <string name="rmbt_measurement_phase_init_hint">Connecting to the test server</string>
+    <string name="rmbt_measurement_phase_ping_hint">Measuring how quickly the connection responds</string>
+    <string name="rmbt_measurement_phase_qos_hint">Checking that all internet services work without restrictions</string>
+    <string name="rmbt_measurement_phase_step">Step %1$d of %2$d · %3$s</string>
+    <string name="rmbt_measurement_phase_upload_hint">Checking how fast your device sends data</string>
+    <string name="rmbt_measurement_ping">Ping</string>
+    <string name="rmbt_measurement_ping_value">%1$s ms</string>
+    <string name="rmbt_measurement_ping_value_1f">%1$.1f ms</string>
+    <string name="rmbt_measurement_progress_units" translatable="false">%</string>
+    <string name="rmbt_measurement_qos">Quality of service (QoS)</string>
+    <string name="rmbt_measurement_server_label">Server</string>
+    <string name="rmbt_measurement_speed_chart_x_label_max">7s</string>
+    <string name="rmbt_measurement_speed_chart_x_label_min">0s</string>
+    <string name="rmbt_measurement_up">Up</string>
+    <string name="rmbt_measurement_upload">Upload</string>
+    <string name="rmbt_menu_button_history">History</string>
+    <string name="rmbt_menu_button_title_page">Home</string>
+    <string name="rmbt_network_label">Network</string>
+    <string name="rmbt_result_hint_ping">response delay, matters for games and calls</string>
+    <string name="rmbt_result_rating_bad">Poor</string>
+    <string name="rmbt_result_rating_excellent">Excellent</string>
+    <string name="rmbt_result_rating_good">Good</string>
+    <string name="rmbt_result_rating_normal">Fair</string>
+    <string name="rmbt_result_verdict_bad">Poor connection</string>
+    <string name="rmbt_result_verdict_bad_description">Pages may load slowly, videos and calls may stutter.</string>
+    <string name="rmbt_result_verdict_excellent">Excellent connection</string>
+    <string name="rmbt_result_verdict_excellent_description">Suitable for 4K video, video calls, online games and large downloads.</string>
+    <string name="rmbt_result_verdict_good">Good connection</string>
+    <string name="rmbt_result_verdict_good_description">Suitable for HD video, video calls and everyday browsing.</string>
+    <string name="rmbt_result_verdict_normal">Fair connection</string>
+    <string name="rmbt_result_verdict_normal_description">Websites and messengers work, videos may buffer.</string>
+    <string name="rmbt_results_network_type">Type</string>
+    <string name="rmbt_results_other_details">Further details</string>
+    <string name="rmbt_scale_value_0_1" translatable="false">0</string>
+    <string name="rmbt_scale_value_1" translatable="false">1M</string>
+    <string name="rmbt_scale_value_10" translatable="false">10M</string>
+    <string name="rmbt_scale_value_100" translatable="false">100M</string>
+    <string name="rmbt_scale_value_1000" translatable="false">1G</string>
+    <string name="rmbt_scale_value_10000" translatable="false">10G</string>
+    <string name="rmbt_share_result">Share result</string>
+    <string name="rmbt_share_result_title">%1$s speed test result</string>
+    <string name="rmbt_speed_progress_units">Mbit/s</string>
+    <string name="rmbt_technology_label">Technology</string>
+    <string name="rmbt_test_dialog_error_text">Test failed. Please try again later.</string>
+    <string name="rmbt_test_result_from">"Test result from: "</string>
+    <string name="rmbt_text_cancel_measurement">Cancel measurement</string>
+    <string name="rmbt_text_continue_measurement">Continue measurement</string>
+    <string name="rmbt_title">Title: </string>
+    <string name="rmbt_title_cancel_measurement">Do you really want to cancel the ongoing measurement?</string>
+    <string name="rmbt_toolbar_title">NetCheck</string>
+    <style name="rmbt_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/rmbt_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/rmbt_colorPrimaryDark</item>
+        <item name="colorAccent">@color/rmbt_colorAccent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/rmbt_colorPrimary</item>
+        <item name="colorControlHighlight">@color/rmbt_greenRipple</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+    </style>
+    <style name="rmbt_MeasurementTheme" parent="@style/rmbt_AppTheme">
+        <item name="android:windowBackground">@color/rmbt_measurement_dark_gray</item>
+        <item name="android:statusBarColor">@color/rmbt_measurement_dark_gray</item>
+    </style>
+    <style name="rmbt_PreferenceTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/rmbt_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/rmbt_colorPrimaryDark</item>
+        <item name="colorAccent">@color/rmbt_colorAccent</item>
+        <item name="android:windowBackground">@color/rmbt_colorPrimary</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="colorControlHighlight">@color/rmbt_greenRipple</item>
+    </style>
+    <style name="rmbt_RobotoBoldStyle">
+        <item name="android:fontFamily">@font/rmbt_roboto_bold</item>
+        <item name="fontFamily">@font/rmbt_roboto_bold</item>
+    </style>
+    <style name="rmbt_RobotoBoldStyle.Medium" parent="@style/rmbt_RobotoBoldStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="rmbt_RobotoMediumStyle">
+        <item name="android:fontFamily">@font/rmbt_roboto_medium</item>
+        <item name="fontFamily">@font/rmbt_roboto_medium</item>
+    </style>
+    <style name="rmbt_RobotoMediumStyle.Large" parent="@style/rmbt_RobotoMediumStyle">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="rmbt_RobotoMediumStyle.Medium" parent="@style/rmbt_RobotoMediumStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="rmbt_RobotoMediumStyle.Small" parent="@style/rmbt_RobotoMediumStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="rmbt_RobotoMediumStyle.VerySmall" parent="@style/rmbt_RobotoMediumStyle">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="rmbt_RobotoRegularStyle">
+        <item name="android:fontFamily">@font/rmbt_roboto_regular</item>
+        <item name="fontFamily">@font/rmbt_roboto_regular</item>
+    </style>
+    <style name="rmbt_RobotoRegularStyle.Medium" parent="@style/rmbt_RobotoRegularStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="rmbt_RobotoRegularStyle.Small" parent="@style/rmbt_RobotoRegularStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="rmbt_RobotoRegularStyle.VerySmall" parent="@style/rmbt_RobotoRegularStyle">
+        <item name="android:textSize">12sp</item>
+    </style>
+</resources>

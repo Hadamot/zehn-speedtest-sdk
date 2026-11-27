@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- History rows slide in one after another when the list is first shown. -->
+<layoutAnimation xmlns:android="http://schemas.android.com/apk/res/android"
+    android:animation="@anim/rmbt_item_history_enter"
+    android:animationOrder="normal"
+    android:delay="8%" />

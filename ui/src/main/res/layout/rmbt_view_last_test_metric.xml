@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?><!-- One value of the "last test" card: what it is, the rating-coloured icon with the number, and its unit. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Longer in Russian and Tajik ("Передача", "Боргузорӣ"): ellipsized instead of pushing the row. -->
+    <TextView
+        android:id="@+id/tvName"
+        style="@style/rmbt_RobotoRegularStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/rmbt_text_gray"
+        android:textSize="11sp"
+        tools:text="Download" />
+
+    <TextView
+        android:id="@+id/tvValue"
+        style="@style/rmbt_RobotoMediumStyle.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="3dp"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textColor="@color/rmbt_text_dark_gray"
+        tools:drawableStart="@drawable/rmbt_ic_small_download_light_green"
+        tools:text="45.2" />
+
+    <TextView
+        android:id="@+id/tvUnit"
+        style="@style/rmbt_RobotoRegularStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textColor="@color/rmbt_text_gray"
+        android:textSize="11sp"
+        tools:text="Mbit/s" />
+
+</LinearLayout>

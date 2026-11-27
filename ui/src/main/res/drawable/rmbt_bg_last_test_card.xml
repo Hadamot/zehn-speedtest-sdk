@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Start screen "last test" card: light rounded panel with a ripple when tapped. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/rmbt_blackRipple">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/rmbt_last_test_card_background" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+</ripple>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Content of LastTestCardView: when and how fast the user's most recent test was. -->
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_height="wrap_content"
+    tools:layout_width="match_parent"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <!-- Colour of the overall rating, the weakest of the three values. Invisible (keeping the
+         row's indent) when nothing is rated, gone without tests. -->
+    <View
+        android:id="@+id/vRatingStripe"
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/rmbt_bg_last_test_rating_stripe"
+        android:importantForAccessibility="no"
+        android:visibility="gone"
+        tools:backgroundTint="@color/rmbt_classification_green"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/llResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:importantForAccessibility="noHideDescendants"
+        android:orientation="horizontal"
+        android:paddingStart="7dp"
+        android:paddingTop="@dimen/rmbt_padding_medium_large"
+        android:paddingEnd="@dimen/rmbt_padding_medium_large"
+        android:paddingBottom="@dimen/rmbt_padding_medium_large">
+
+        <!-- Time and values side by side; stacked by LastTestCardView at large font sizes so the
+             numbers are never clipped. -->
+        <LinearLayout
+            android:id="@+id/llContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/llTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/rmbt_padding_medium_large"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/rmbt_RobotoRegularStyle.VerySmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rmbt_home_last_test_title"
+                    android:textColor="@color/rmbt_text_gray" />
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    style="@style/rmbt_RobotoMediumStyle.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="2"
+                    android:textColor="@color/rmbt_text_dark_gray"
+                    tools:text="Today, 09:10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llMetrics"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/download"
+                    layout="@layout/rmbt_view_last_test_metric"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <include
+                    android:id="@+id/upload"
+                    layout="@layout/rmbt_view_last_test_metric"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/rmbt_margin_small"
+                    android:layout_weight="1" />
+
+                <include
+                    android:id="@+id/ping"
+                    layout="@layout/rmbt_view_last_test_metric"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/rmbt_margin_small"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="@dimen/rmbt_margin_small"
+            android:importantForAccessibility="no"
+            android:src="@drawable/rmbt_ic_chevron_end" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvNoTests"
+        style="@style/rmbt_RobotoRegularStyle.Small"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:importantForAccessibility="no"
+        android:padding="@dimen/rmbt_padding_large"
+        android:text="@string/rmbt_home_last_test_empty"
+        android:textColor="@color/rmbt_text_gray"
+        android:visibility="gone" />
+
+</merge>

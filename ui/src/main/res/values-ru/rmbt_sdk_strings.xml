@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rmbt_sdk_mobile_network">Мобильная сеть</string>
+    <string name="rmbt_sdk_other_network">Сеть</string>
+    <string name="rmbt_sdk_back">Назад</string>
+    <string name="rmbt_sdk_location">Местоположение</string>
+    <string name="rmbt_sdk_location_accuracy">±%1$d м</string>
+    <string name="rmbt_sdk_location_unknown">Не определено. Разрешите доступ к геолокации перед тестом, чтобы видеть, где он прошёл.</string>
+    <string name="rmbt_sdk_location_map">Карта с местом теста. Открывает приложение карт</string>
+</resources>

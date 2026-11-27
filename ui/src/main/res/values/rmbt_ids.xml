@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="rmbt_tag_beacon_animator" type="id" />
+    <item name="rmbt_tag_pulse_animator" type="id" />
+    <item name="rmbt_history_container" type="id" />
+</resources>

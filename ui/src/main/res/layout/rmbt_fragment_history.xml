@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copied from open-rmbt-android (fragment_history.xml). Filters, sync and file export are removed;
+  ~ the history is stored on the device, so there is no loading or loading-failed state.
+  -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/historyRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rmbt_bg_white">
+
+    <!-- Shown when the history is a screen of its own (RmbtHistoryFragment.withBackButton). -->
+    <ImageView
+        android:id="@+id/buttonBack"
+        android:layout_width="@dimen/rmbt_toolbar_button_size"
+        android:layout_height="@dimen/rmbt_toolbar_button_size"
+        android:layout_marginStart="@dimen/rmbt_margin_small"
+        android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="@string/rmbt_sdk_back"
+        android:scaleType="center"
+        android:src="@drawable/rmbt_ic_back"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/labelTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/labelTitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/labelTitle"
+        style="@style/rmbt_RobotoMediumStyle.Large"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:accessibilityHeading="true"
+        android:gravity="start|center_vertical"
+        android:minHeight="?attr/actionBarSize"
+        android:paddingStart="@dimen/rmbt_padding_large"
+        android:paddingEnd="@dimen/rmbt_padding_large"
+        android:text="@string/rmbt_menu_button_history"
+        android:textColor="@color/rmbt_text_dark_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/viewDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/rmbt_margin_large"
+        android:layout_marginEnd="@dimen/rmbt_margin_large"
+        android:background="@color/rmbt_horizontal_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelTitle" />
+
+    <include
+        android:id="@+id/view_history_header"
+        layout="@layout/rmbt_item_history_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewDivider" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHistoryItems"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:layoutAnimation="@anim/rmbt_layout_history_items"
+        android:paddingStart="@dimen/rmbt_padding_large"
+        android:paddingEnd="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_history_header"
+        tools:listitem="@layout/rmbt_item_history" />
+
+    <!-- Empty history: explain where the tests come from instead of a bare "No data". -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layoutHistoryEmpty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rmbt_margin_large"
+        android:layout_marginEnd="@dimen/rmbt_margin_large"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_history_header">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/rmbt_history_empty_icon_size"
+            android:layout_height="@dimen/rmbt_history_empty_icon_size"
+            android:alpha="0.4"
+            android:contentDescription="@null"
+            android:src="@drawable/rmbt_ic_menu_history" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/rmbt_RobotoMediumStyle.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/rmbt_margin_medium"
+            android:gravity="center"
+            android:text="@string/rmbt_history_no_data"
+            android:textColor="@color/rmbt_text_dark_gray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/rmbt_RobotoRegularStyle.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/rmbt_padding_very_small"
+            android:gravity="center"
+            android:text="@string/rmbt_history_no_data_hint"
+            android:textColor="@color/rmbt_text_gray_transparency_60" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

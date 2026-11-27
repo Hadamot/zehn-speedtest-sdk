@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rmbt_sdk_mobile_network">Шабакаи мобилӣ</string>
+    <string name="rmbt_sdk_other_network">Шабака</string>
+    <string name="rmbt_sdk_back">Ба ақиб</string>
+    <string name="rmbt_sdk_location">Ҷойгиршавӣ</string>
+    <string name="rmbt_sdk_location_accuracy">±%1$d м</string>
+    <string name="rmbt_sdk_location_unknown">Муайян нашуд. Пеш аз санҷиш ба ҷойгиршавӣ иҷозат диҳед, то ҷои онро бинед.</string>
+    <string name="rmbt_sdk_location_map">Харита бо ҷои санҷиш. Барномаи харитаро мекушояд</string>
+</resources>

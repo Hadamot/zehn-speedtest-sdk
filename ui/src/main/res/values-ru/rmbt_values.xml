@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copied from open-rmbt-android; names prefixed with rmbt_. -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string-array name="rmbt_measurement_speed_chart_y_labels">
+        <item>1M</item>
+        <item>10M</item>
+        <item>100M</item>
+        <item>1G</item>
+        <item>10G</item>
+    </string-array>
+    <string name="rmbt_bottom_navigation_area">Нижняя панель навигации</string>
+    <string name="rmbt_content_label_close">Закрыть</string>
+    <string name="rmbt_history_item_header_down">Загрузка</string>
+    <string name="rmbt_history_item_header_ms">мс</string>
+    <string name="rmbt_history_item_header_ping">Пинг</string>
+    <string name="rmbt_history_item_header_test">Дата</string>
+    <string name="rmbt_history_item_header_up">Передача</string>
+    <string name="rmbt_history_list_header_container">Заголовок списка истории</string>
+    <string name="rmbt_history_list_header_date">Заголовок списка истории: дата</string>
+    <string name="rmbt_history_list_header_download_speed">Заголовок списка истории: скорость загрузки</string>
+    <string name="rmbt_history_list_header_download_speed_units">Заголовок списка истории: единицы скорости загрузки: Мбит/с </string>
+    <string name="rmbt_history_list_header_ping">Заголовок списка истории: пинг</string>
+    <string name="rmbt_history_list_header_ping_units">Заголовок списка истории: единицы пинга: миллисекунды </string>
+    <string name="rmbt_history_list_header_upload_speed">Заголовок списка истории: скорость передачи</string>
+    <string name="rmbt_history_list_header_upload_speed_units">Заголовок списка истории: единицы скорости передачи: Мбит/с </string>
+    <string name="rmbt_history_no_data">Нет данных.</string>
+    <string name="rmbt_history_no_data_hint">Здесь появятся ваши тесты. Запустите первый тест на главном экране.</string>
+    <string name="rmbt_history_today">Сегодня</string>
+    <string name="rmbt_history_yesterday">Вчера</string>
+    <string name="rmbt_home_history">Основная навигация: история</string>
+    <string name="rmbt_home_home">Основная навигация: главная</string>
+    <string name="rmbt_home_last_test_empty">Здесь появятся результаты ваших тестов.</string>
+    <string name="rmbt_home_last_test_title">Последний тест</string>
+    <string name="rmbt_home_no_internet_connection">Нет подключения к интернету!</string>
+    <string name="rmbt_home_no_internet_connection_details">Тест невозможен.</string>
+    <string name="rmbt_home_signal_quality_excellent">Отличный сигнал</string>
+    <string name="rmbt_home_signal_quality_fair">Средний сигнал</string>
+    <string name="rmbt_home_signal_quality_good">Хороший сигнал</string>
+    <string name="rmbt_home_signal_quality_weak">Слабый сигнал, скорость может быть ниже</string>
+    <string name="rmbt_home_start_measurement">Начать измерение</string>
+    <string name="rmbt_home_start_test_info">Нажмите кнопку, чтобы начать тест!</string>
+    <string name="rmbt_home_wifi">Wi-Fi</string>
+    <string name="rmbt_input_setting_dialog_ok">ОК</string>
+    <string name="rmbt_label_download">Загрузка</string>
+    <string name="rmbt_label_init">Запуск</string>
+    <string name="rmbt_label_ping">Пинг</string>
+    <string name="rmbt_label_qos">QoS</string>
+    <string name="rmbt_label_upload">Передача</string>
+    <string name="rmbt_map_legend_unit_ms">мс</string>
+    <string name="rmbt_measurement_cancel">Отмена</string>
+    <string name="rmbt_measurement_dash">-</string>
+    <string name="rmbt_measurement_down">Загрузка</string>
+    <string name="rmbt_measurement_download">Загрузка</string>
+    <string name="rmbt_measurement_download_upload_speed">%1$s Мбит/с</string>
+    <string name="rmbt_measurement_phase_download_hint">Проверяем, как быстро данные приходят на устройство</string>
+    <string name="rmbt_measurement_phase_init">Подключение</string>
+    <string name="rmbt_measurement_phase_init_hint">Подключаемся к серверу для теста</string>
+    <string name="rmbt_measurement_phase_ping_hint">Измеряем, как быстро отвечает соединение</string>
+    <string name="rmbt_measurement_phase_qos_hint">Проверяем, что все интернет-сервисы работают без ограничений</string>
+    <string name="rmbt_measurement_phase_step">Шаг %1$d из %2$d · %3$s</string>
+    <string name="rmbt_measurement_phase_upload_hint">Проверяем, как быстро устройство отправляет данные</string>
+    <string name="rmbt_measurement_ping">Пинг</string>
+    <string name="rmbt_measurement_ping_value">%1$s мс</string>
+    <string name="rmbt_measurement_ping_value_1f">%1$.1f мс</string>
+    <string name="rmbt_measurement_qos">Качество обслуживания (QoS)</string>
+    <string name="rmbt_measurement_server_label">Сервер</string>
+    <string name="rmbt_measurement_speed_chart_x_label_max">7 с</string>
+    <string name="rmbt_measurement_speed_chart_x_label_min">0 с</string>
+    <string name="rmbt_measurement_up">Передача</string>
+    <string name="rmbt_measurement_upload">Передача</string>
+    <string name="rmbt_menu_button_history">История</string>
+    <string name="rmbt_menu_button_title_page">Главная</string>
+    <string name="rmbt_network_label">Сеть</string>
+    <string name="rmbt_result_hint_ping">задержка отклика, важна для игр и звонков</string>
+    <string name="rmbt_result_rating_bad">Плохо</string>
+    <string name="rmbt_result_rating_excellent">Отлично</string>
+    <string name="rmbt_result_rating_good">Хорошо</string>
+    <string name="rmbt_result_rating_normal">Средне</string>
+    <string name="rmbt_result_verdict_bad">Слабое соединение</string>
+    <string name="rmbt_result_verdict_bad_description">Страницы могут открываться медленно, видео и звонки — прерываться.</string>
+    <string name="rmbt_result_verdict_excellent">Отличное соединение</string>
+    <string name="rmbt_result_verdict_excellent_description">Подойдёт для 4K-видео, видеозвонков, онлайн-игр и больших загрузок.</string>
+    <string name="rmbt_result_verdict_good">Хорошее соединение</string>
+    <string name="rmbt_result_verdict_good_description">Подойдёт для HD-видео, видеозвонков и повседневного интернета.</string>
+    <string name="rmbt_result_verdict_normal">Среднее соединение</string>
+    <string name="rmbt_result_verdict_normal_description">Сайты и мессенджеры работают, видео может подгружаться.</string>
+    <string name="rmbt_results_network_type">Тип</string>
+    <string name="rmbt_results_other_details">Подробнее</string>
+    <string name="rmbt_share_result">Поделиться результатом</string>
+    <string name="rmbt_share_result_title">Результат теста скорости %1$s</string>
+    <string name="rmbt_speed_progress_units">Мбит/с</string>
+    <string name="rmbt_technology_label">Технология</string>
+    <string name="rmbt_test_dialog_error_text">Не удалось выполнить тест. Повторите попытку позже.</string>
+    <string name="rmbt_test_result_from">"Результат теста от: "</string>
+    <string name="rmbt_text_cancel_measurement">Отменить измерение</string>
+    <string name="rmbt_text_continue_measurement">Продолжить измерение</string>
+    <string name="rmbt_title">Заголовок: </string>
+    <string name="rmbt_title_cancel_measurement">Отменить текущее измерение?</string>
+    <string name="rmbt_toolbar_title">NetCheck</string>
+</resources>

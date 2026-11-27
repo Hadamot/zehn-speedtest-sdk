@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copied from open-rmbt-android; names prefixed with rmbt_. -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string-array name="rmbt_measurement_speed_chart_y_labels">
+        <item>1M</item>
+        <item>10M</item>
+        <item>100M</item>
+        <item>1G</item>
+        <item>10G</item>
+    </string-array>
+    <string name="rmbt_bottom_navigation_area">Панели поёнии паймоиш</string>
+    <string name="rmbt_content_label_close">Пӯшидан</string>
+    <string name="rmbt_history_item_header_down">Қабул</string>
+    <string name="rmbt_history_item_header_ms">мс</string>
+    <string name="rmbt_history_item_header_ping">Пинг</string>
+    <string name="rmbt_history_item_header_test">Сана</string>
+    <string name="rmbt_history_item_header_up">Ирсол</string>
+    <string name="rmbt_history_list_header_container">Блоки сарлавҳаи рӯйхати таърих</string>
+    <string name="rmbt_history_list_header_date">Сарлавҳаи рӯйхати таърих: сана</string>
+    <string name="rmbt_history_list_header_download_speed">Сарлавҳаи рӯйхати таърих: суръати боргирӣ</string>
+    <string name="rmbt_history_list_header_download_speed_units">Сарлавҳаи рӯйхати таърих: воҳиди суръати боргирӣ: Мбит/с </string>
+    <string name="rmbt_history_list_header_ping">Сарлавҳаи рӯйхати таърих: пинг</string>
+    <string name="rmbt_history_list_header_ping_units">Сарлавҳаи рӯйхати таърих: воҳиди пинг: миллисония </string>
+    <string name="rmbt_history_list_header_upload_speed">Сарлавҳаи рӯйхати таърих: суръати боргузорӣ</string>
+    <string name="rmbt_history_list_header_upload_speed_units">Сарлавҳаи рӯйхати таърих: воҳиди суръати боргузорӣ: Мбит/с </string>
+    <string name="rmbt_history_no_data">Маълумот нест.</string>
+    <string name="rmbt_history_no_data_hint">Санҷишҳои шумо дар ин ҷо пайдо мешаванд. Санҷиши аввалинро дар экрани асосӣ оғоз кунед.</string>
+    <string name="rmbt_history_today">Имрӯз</string>
+    <string name="rmbt_history_yesterday">Дирӯз</string>
+    <string name="rmbt_home_history">Менюи асосӣ: Таърих</string>
+    <string name="rmbt_home_home">Менюи асосӣ: Асосӣ</string>
+    <string name="rmbt_home_last_test_empty">Натиҷаҳои санҷишҳои шумо дар ин ҷо пайдо мешаванд.</string>
+    <string name="rmbt_home_last_test_title">Санҷиши охирин</string>
+    <string name="rmbt_home_no_internet_connection">Пайвастшавӣ ба интернет нест!</string>
+    <string name="rmbt_home_no_internet_connection_details">Санҷиш имконнопазир аст.</string>
+    <string name="rmbt_home_signal_quality_excellent">Сигнали аъло</string>
+    <string name="rmbt_home_signal_quality_fair">Сигнали миёна</string>
+    <string name="rmbt_home_signal_quality_good">Сигнали хуб</string>
+    <string name="rmbt_home_signal_quality_weak">Сигнали заиф, суръат метавонад пасттар бошад</string>
+    <string name="rmbt_home_start_measurement">Оғози ченкунӣ</string>
+    <string name="rmbt_home_start_test_info">Барои оғози санҷиш тугмаро пахш кунед!</string>
+    <string name="rmbt_home_wifi">Wi-Fi</string>
+    <string name="rmbt_input_setting_dialog_ok">OK</string>
+    <string name="rmbt_label_download">Боргирӣ</string>
+    <string name="rmbt_label_init">Оғоз</string>
+    <string name="rmbt_label_ping">Пинг</string>
+    <string name="rmbt_label_qos">QoS</string>
+    <string name="rmbt_label_upload">Боргузорӣ</string>
+    <string name="rmbt_map_legend_unit_ms">мс</string>
+    <string name="rmbt_measurement_cancel">Бекор кардан</string>
+    <string name="rmbt_measurement_dash">-</string>
+    <string name="rmbt_measurement_down">Қабул</string>
+    <string name="rmbt_measurement_download">Боргирӣ</string>
+    <string name="rmbt_measurement_download_upload_speed">%1$s Мбит/с</string>
+    <string name="rmbt_measurement_phase_download_hint">Месанҷем, ки маълумот чӣ қадар зуд ба дастгоҳ мерасад</string>
+    <string name="rmbt_measurement_phase_init">Пайвастшавӣ</string>
+    <string name="rmbt_measurement_phase_init_hint">Ба сервери санҷиш пайваст мешавем</string>
+    <string name="rmbt_measurement_phase_ping_hint">Чен мекунем, ки пайвастшавӣ чӣ қадар зуд ҷавоб медиҳад</string>
+    <string name="rmbt_measurement_phase_qos_hint">Месанҷем, ки ҳамаи хидматҳои интернет бе маҳдудият кор мекунанд</string>
+    <string name="rmbt_measurement_phase_step">Қадами %1$d аз %2$d · %3$s</string>
+    <string name="rmbt_measurement_phase_upload_hint">Месанҷем, ки дастгоҳ маълумотро чӣ қадар зуд мефиристад</string>
+    <string name="rmbt_measurement_ping">Пинг</string>
+    <string name="rmbt_measurement_ping_value">%1$s мс</string>
+    <string name="rmbt_measurement_ping_value_1f">%1$.1f мс</string>
+    <string name="rmbt_measurement_qos">Сифати хидмат (QoS)</string>
+    <string name="rmbt_measurement_server_label">Сервер</string>
+    <string name="rmbt_measurement_speed_chart_x_label_max">7с</string>
+    <string name="rmbt_measurement_speed_chart_x_label_min">0с</string>
+    <string name="rmbt_measurement_up">Ирсол</string>
+    <string name="rmbt_measurement_upload">Боргузорӣ</string>
+    <string name="rmbt_menu_button_history">Таърих</string>
+    <string name="rmbt_menu_button_title_page">Асосӣ</string>
+    <string name="rmbt_network_label">Шабака</string>
+    <string name="rmbt_result_hint_ping">таъхири ҷавоб, барои бозиҳо ва зангҳо муҳим аст</string>
+    <string name="rmbt_result_rating_bad">Бад</string>
+    <string name="rmbt_result_rating_excellent">Аъло</string>
+    <string name="rmbt_result_rating_good">Хуб</string>
+    <string name="rmbt_result_rating_normal">Миёна</string>
+    <string name="rmbt_result_verdict_bad">Пайвасти заиф</string>
+    <string name="rmbt_result_verdict_bad_description">Саҳифаҳо метавонанд оҳиста кушода шаванд, видео ва зангҳо қатъ шаванд.</string>
+    <string name="rmbt_result_verdict_excellent">Пайвасти аъло</string>
+    <string name="rmbt_result_verdict_excellent_description">Барои видеои 4K, видеозангҳо, бозиҳои онлайн ва боргириҳои калон мувофиқ аст.</string>
+    <string name="rmbt_result_verdict_good">Пайвасти хуб</string>
+    <string name="rmbt_result_verdict_good_description">Барои видеои HD, видеозангҳо ва интернети ҳаррӯза мувофиқ аст.</string>
+    <string name="rmbt_result_verdict_normal">Пайвасти миёна</string>
+    <string name="rmbt_result_verdict_normal_description">Сайтҳо ва мессенҷерҳо кор мекунанд, видео метавонад боздошта шавад.</string>
+    <string name="rmbt_results_network_type">Навъ</string>
+    <string name="rmbt_results_other_details">Тафсилоти бештар</string>
+    <string name="rmbt_share_result">Мубодилаи натиҷа</string>
+    <string name="rmbt_share_result_title">Натиҷаи санҷиши суръати %1$s</string>
+    <string name="rmbt_speed_progress_units">Мбит/с</string>
+    <string name="rmbt_technology_label">Технология</string>
+    <string name="rmbt_test_dialog_error_text">Санҷиш иҷро нашуд. Лутфан дертар бори дигар кӯшиш кунед.</string>
+    <string name="rmbt_test_result_from">"Натиҷаи санҷиш аз: "</string>
+    <string name="rmbt_text_cancel_measurement">Бекор кардани ченкунӣ</string>
+    <string name="rmbt_text_continue_measurement">Идома додани ченкунӣ</string>
+    <string name="rmbt_title">Сарлавҳа: </string>
+    <string name="rmbt_title_cancel_measurement">Оё воқеан мехоҳед ченкунии ҷориро бекор кунед?</string>
+    <string name="rmbt_toolbar_title">NetCheck</string>
+</resources>

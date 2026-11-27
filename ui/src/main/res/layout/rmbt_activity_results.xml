@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copied from open-rmbt-android (activity_results.xml). Charts, cell towers, QoE/QoS, the coverage map, test
+  ~ details and file downloads are removed; the values are set from code (view binding).
+  -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/resultsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/resultsScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:clipToPadding="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/rmbt_margin_large">
+
+            <TextView
+                android:id="@+id/networkTypeText"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_padding_large"
+                android:layout_marginTop="@dimen/rmbt_padding_large"
+                android:textAllCaps="true"
+                android:textColor="@color/rmbt_text_black_transparency_40"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="WLAN" />
+
+            <TextView
+                android:id="@+id/networkNameText"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_padding_large"
+                android:layout_marginTop="@dimen/rmbt_padding_small"
+                android:layout_marginEnd="@dimen/rmbt_padding_medium"
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toStartOf="@+id/networkTypeIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/networkTypeText"
+                tools:text="Wififinka" />
+
+            <ImageView
+                android:id="@+id/networkTypeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/rmbt_padding_large"
+                android:contentDescription="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/networkNameText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/networkTypeText" />
+
+            <!-- Tinted card behind the verdict, in the color of the overall rating. -->
+            <View
+                android:id="@+id/viewVerdictBackground"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/rmbt_margin_medium"
+                android:layout_marginEnd="@dimen/rmbt_margin_medium"
+                android:background="@drawable/rmbt_bg_result_verdict"
+                app:layout_constraintBottom_toBottomOf="@id/textVerdictDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textVerdict" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textVerdict"
+                style="@style/rmbt_RobotoBoldStyle.Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:layout_marginTop="@dimen/rmbt_margin_large"
+                android:layout_marginEnd="@dimen/rmbt_margin_large"
+                android:accessibilityHeading="true"
+                android:paddingTop="@dimen/rmbt_padding_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/networkNameText"
+                tools:text="Good connection"
+                tools:textColor="@color/rmbt_classification_green" />
+
+            <!-- How far the result is from the best rating: 1 to 4 filled segments. -->
+            <tj.zehn.rmbt.ui.view.RatingMeterView
+                android:id="@+id/meterVerdict"
+                android:layout_width="@dimen/rmbt_result_verdict_meter_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:layout_marginTop="@dimen/rmbt_padding_small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textVerdict" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textVerdictDescription"
+                style="@style/rmbt_RobotoRegularStyle.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:layout_marginTop="@dimen/rmbt_padding_small"
+                android:layout_marginEnd="@dimen/rmbt_margin_large"
+                android:paddingBottom="@dimen/rmbt_padding_medium"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/meterVerdict"
+                tools:text="Suitable for HD video, video calls and everyday browsing." />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelResultBottomDownload"
+                style="@style/rmbt_RobotoBoldStyle.Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:layout_marginTop="@dimen/rmbt_margin_large"
+                android:text="@string/rmbt_measurement_down"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                app:layout_constraintEnd_toStartOf="@+id/labelResultBottomUpload"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textVerdictDescription" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelResultBottomUpload"
+                style="@style/rmbt_RobotoBoldStyle.Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/rmbt_margin_large"
+                android:text="@string/rmbt_measurement_up"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                app:layout_constraintBottom_toBottomOf="@+id/labelResultBottomDownload"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintStart_toEndOf="@+id/labelResultBottomDownload"
+                app:layout_constraintTop_toTopOf="@+id/labelResultBottomDownload" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textDownloadSpeed"
+                style="@style/rmbt_RobotoMediumStyle.Large"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:accessibilityTraversalAfter="@id/labelResultBottomDownload"
+                android:drawablePadding="@dimen/rmbt_padding_very_small"
+                android:maxLines="2"
+                app:layout_constraintEnd_toStartOf="@+id/textUploadSpeed"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelResultBottomDownload"
+                tools:drawableStart="@drawable/rmbt_ic_small_download_light_green"
+                tools:text="24.12 Mbit/s" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textUploadSpeed"
+                style="@style/rmbt_RobotoMediumStyle.Large"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/rmbt_margin_large"
+                android:accessibilityTraversalAfter="@id/labelResultBottomUpload"
+                android:drawablePadding="@dimen/rmbt_padding_very_small"
+                android:maxLines="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintStart_toEndOf="@+id/textDownloadSpeed"
+                app:layout_constraintTop_toBottomOf="@+id/labelResultBottomUpload"
+                tools:drawableStart="@drawable/rmbt_ic_small_upload_gray"
+                tools:text="135 Mbit/s" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textDownloadHint"
+                style="@style/rmbt_RobotoRegularStyle.VerySmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/rmbt_padding_very_small"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                app:layout_constraintEnd_toEndOf="@id/textDownloadSpeed"
+                app:layout_constraintStart_toStartOf="@id/textDownloadSpeed"
+                app:layout_constraintTop_toBottomOf="@id/textDownloadSpeed"
+                tools:text="Good" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textUploadHint"
+                style="@style/rmbt_RobotoRegularStyle.VerySmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/rmbt_padding_very_small"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                app:layout_constraintEnd_toEndOf="@id/textUploadSpeed"
+                app:layout_constraintStart_toStartOf="@id/textUploadSpeed"
+                app:layout_constraintTop_toBottomOf="@id/textUploadSpeed"
+                tools:text="Fair" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierSpeedHints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="textDownloadSpeed,textUploadSpeed,textDownloadHint,textUploadHint" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelResultBottomPing"
+                style="@style/rmbt_RobotoBoldStyle.Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:layout_marginTop="@dimen/rmbt_margin_medium"
+                android:layout_marginEnd="@dimen/rmbt_margin_large"
+                android:text="@string/rmbt_measurement_ping"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barrierSpeedHints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textPing"
+                style="@style/rmbt_RobotoMediumStyle.Large"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:layout_marginEnd="@dimen/rmbt_margin_large"
+                android:accessibilityTraversalAfter="@id/labelResultBottomPing"
+                android:drawablePadding="@dimen/rmbt_padding_very_small"
+                android:maxLines="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelResultBottomPing"
+                tools:drawableStart="@drawable/rmbt_ic_small_ping_yellow"
+                tools:text="14 ms" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textPingHint"
+                style="@style/rmbt_RobotoRegularStyle.VerySmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/rmbt_padding_very_small"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                app:layout_constraintEnd_toEndOf="@id/textPing"
+                app:layout_constraintStart_toStartOf="@id/textPing"
+                app:layout_constraintTop_toBottomOf="@id/textPing"
+                tools:text="Good · response delay, matters for games and calls" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleOtherDetails"
+                style="@style/rmbt_RobotoMediumStyle.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/rmbt_margin_medium"
+                android:accessibilityHeading="true"
+                android:gravity="center_vertical"
+                android:minHeight="?attr/actionBarSize"
+                android:paddingStart="@dimen/rmbt_margin_large"
+                android:paddingEnd="@dimen/rmbt_margin_large"
+                android:text="@string/rmbt_results_other_details"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textPingHint" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleNetwork"
+                style="@style/rmbt_RobotoBoldStyle.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:accessibilityHeading="true"
+                android:gravity="center_vertical"
+                android:text="@string/rmbt_network_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleOtherDetails" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelConnection"
+                style="@style/rmbt_RobotoRegularStyle.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:paddingTop="@dimen/rmbt_padding_small"
+                android:paddingBottom="@dimen/rmbt_padding_small"
+                android:text="@string/rmbt_results_network_type"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleNetwork" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textConnection"
+                style="@style/rmbt_RobotoRegularStyle.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/rmbt_margin_large"
+                app:layout_constraintBottom_toBottomOf="@+id/labelConnection"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/labelConnection"
+                tools:text="WLAN" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelServer"
+                style="@style/rmbt_RobotoRegularStyle.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:paddingTop="@dimen/rmbt_padding_small"
+                android:paddingBottom="@dimen/rmbt_padding_small"
+                android:text="@string/rmbt_measurement_server_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelConnection" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textServer"
+                style="@style/rmbt_RobotoRegularStyle.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:layout_marginEnd="@dimen/rmbt_margin_large"
+                android:gravity="end"
+                app:layout_constraintBottom_toBottomOf="@+id/labelServer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/labelServer"
+                app:layout_constraintTop_toTopOf="@+id/labelServer"
+                tools:text="Dushanbe" />
+
+            <!-- Where the test ran: a static Google map (lite mode) with the point, and the coordinates. -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleLocation"
+                style="@style/rmbt_RobotoBoldStyle.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:layout_marginTop="@dimen/rmbt_margin_medium"
+                android:accessibilityHeading="true"
+                android:gravity="center_vertical"
+                android:text="@string/rmbt_sdk_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelServer" />
+
+            <!-- A plain FrameLayout, not MaterialCardView: the SDK screens use an AppCompat theme, which
+                 MaterialCardView refuses. Rounded corners come from the background and clipToOutline. -->
+            <FrameLayout
+                android:id="@+id/locationMapCard"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/rmbt_result_map_height"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:layout_marginEnd="@dimen/rmbt_margin_large"
+                android:background="@drawable/rmbt_bg_map_card"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleLocation"
+                tools:visibility="visible">
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/locationMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/rmbt_sdk_location_map"
+                    app:liteMode="true"
+                    app:mapType="normal"
+                    app:uiMapToolbar="false" />
+
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textLocation"
+                style="@style/rmbt_RobotoRegularStyle.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/rmbt_margin_large"
+                android:layout_marginTop="@dimen/rmbt_padding_medium"
+                android:layout_marginEnd="@dimen/rmbt_margin_large"
+                android:textColor="@color/rmbt_text_gray_transparency_60"
+                android:textIsSelectable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/locationMapCard"
+                tools:text="38.55980, 68.78700 · ±12 m" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:elevation="2dp">
+
+        <ImageView
+            android:id="@+id/buttonBack"
+            android:layout_width="@dimen/rmbt_toolbar_button_size"
+            android:layout_height="@dimen/rmbt_toolbar_button_size"
+            android:layout_marginStart="@dimen/rmbt_margin_small"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/rmbt_content_label_close"
+            android:scaleType="center"
+            android:src="@drawable/rmbt_ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/testTime"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/buttonShare"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/buttonBack"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="20.11.18, 12:00:45" />
+
+        <ImageView
+            android:id="@+id/buttonShare"
+            android:layout_width="@dimen/rmbt_toolbar_button_size"
+            android:layout_height="@dimen/rmbt_toolbar_button_size"
+            android:layout_marginEnd="@dimen/rmbt_margin_small"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/rmbt_share_result"
+            android:scaleType="center"
+            android:src="@drawable/rmbt_ic_share"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

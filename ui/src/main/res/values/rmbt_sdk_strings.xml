@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Strings added by the SDK (not in open-rmbt-android). -->
+<resources>
+    <string name="rmbt_sdk_mobile_network">Mobile network</string>
+    <string name="rmbt_sdk_other_network">Network</string>
+    <string name="rmbt_sdk_back">Back</string>
+    <string name="rmbt_sdk_location">Location</string>
+    <string name="rmbt_sdk_location_accuracy">±%1$d m</string>
+    <string name="rmbt_sdk_location_unknown">Not determined. Allow access to location before the test to see where it ran.</string>
+    <string name="rmbt_sdk_location_map">Map with the place of the test. Opens the maps app</string>
+</resources>

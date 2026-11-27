@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copied from open-rmbt-android (layout-land/fragment_home.xml). Loop mode, coverage, settings, captive
+  ~ portal, expert and Pro views are removed; the values are set from code (view binding) instead of data
+  ~ binding. The right panel, which holds the Pro signal/frequency in the app, shows the last test card.
+  -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rmbt_bg_splash">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/rmbt_home_brand_logo_height"
+        android:layout_marginTop="@dimen/rmbt_margin_medium"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/rmbt_toolbar_title"
+        android:src="@drawable/rmbt_ic_brand_logo_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/leftView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/waveView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.515" />
+
+    <!-- Fills the gap behind the right half of the vertical wave. -->
+    <View
+        android:id="@+id/waveViewBackground"
+        android:layout_width="15dp"
+        android:layout_height="0dp"
+        android:background="@color/rmbt_colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/waveView"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/waveView" />
+
+    <tj.zehn.rmbt.ui.view.WaveView
+        android:id="@+id/waveView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rightView"
+        app:layout_constraintStart_toEndOf="@+id/leftView"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintWidth_percent="0.05" />
+
+    <View
+        android:id="@+id/rightView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/rmbt_colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/waveView"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <View
+        android:id="@+id/viewCircleShape"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivIsConnectedCircle"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@+id/ivIsConnectedCircle"
+        app:layout_constraintHeight_percent="0.23"
+        app:layout_constraintStart_toStartOf="@+id/ivIsConnectedCircle"
+        app:layout_constraintTop_toTopOf="@+id/ivIsConnectedCircle" />
+
+    <!-- Light rings spreading from the start button while a test can be started; animated in
+         HomeFragment. Drawn under the circle. -->
+    <View
+        android:id="@+id/vStartHalo1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0"
+        android:background="@drawable/rmbt_bg_start_halo"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="@+id/ivIsConnectedCircle"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@+id/ivIsConnectedCircle"
+        app:layout_constraintStart_toStartOf="@+id/ivIsConnectedCircle"
+        app:layout_constraintTop_toTopOf="@+id/ivIsConnectedCircle" />
+
+    <View
+        android:id="@+id/vStartHalo2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0"
+        android:background="@drawable/rmbt_bg_start_halo"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="@+id/ivIsConnectedCircle"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@+id/ivIsConnectedCircle"
+        app:layout_constraintStart_toStartOf="@+id/ivIsConnectedCircle"
+        app:layout_constraintTop_toTopOf="@+id/ivIsConnectedCircle" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivIsConnectedCircle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/rmbt_bg_home_with_internet_circle"
+        app:layout_constraintBottom_toTopOf="@+id/tvNetworkType"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@+id/leftView"
+        app:layout_constraintHeight_percent="0.45"
+        app:layout_constraintStart_toStartOf="@+id/leftView"
+        app:layout_constraintTop_toTopOf="@+id/leftView"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/ivSignalLevel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rmbt_bg_selection"
+        android:contentDescription="@string/rmbt_home_start_measurement"
+        android:scaleType="centerInside"
+        android:src="@drawable/rmbt_ic_mobile_3"
+        app:layout_constraintBottom_toBottomOf="@+id/viewCircleShape"
+        app:layout_constraintEnd_toEndOf="@+id/viewCircleShape"
+        app:layout_constraintStart_toStartOf="@+id/viewCircleShape"
+        app:layout_constraintTop_toTopOf="@+id/viewCircleShape" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivTechnology"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:importantForAccessibility="no"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="@+id/viewCircleShape"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintStart_toStartOf="@+id/viewCircleShape"
+        app:layout_constraintTop_toTopOf="@+id/viewCircleShape"
+        tools:src="@drawable/rmbt_ic_label_ethernet" />
+
+    <View
+        android:id="@+id/circleMarginView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="@id/leftView"
+        app:layout_constraintHeight_percent="0.043"
+        app:layout_constraintStart_toStartOf="@+id/leftView"
+        app:layout_constraintTop_toTopOf="@+id/ivIsConnectedCircle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_info"
+        style="@style/rmbt_RobotoRegularStyle.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rmbt_bg_info_window"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:paddingStart="@dimen/rmbt_padding_large"
+        android:paddingTop="@dimen/rmbt_padding_medium"
+        android:paddingEnd="@dimen/rmbt_padding_large"
+        android:paddingBottom="@dimen/rmbt_padding_large"
+        android:text="@string/rmbt_home_start_test_info"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/circleMarginView"
+        app:layout_constraintEnd_toEndOf="@id/leftView"
+        app:layout_constraintStart_toStartOf="@+id/leftView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNetworkType"
+        style="@style/rmbt_RobotoMediumStyle.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/rmbt_text_white_transparency_40"
+        app:layout_constraintBottom_toTopOf="@+id/tvNetworkName"
+        app:layout_constraintEnd_toEndOf="@+id/leftView"
+        app:layout_constraintStart_toStartOf="@+id/leftView"
+        app:layout_constraintTop_toBottomOf="@+id/ivIsConnectedCircle"
+        tools:text="4G/LTE" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNetworkName"
+        style="@style/rmbt_RobotoMediumStyle.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rmbt_margin_medium"
+        android:layout_marginEnd="@dimen/rmbt_margin_medium"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/tvSignalQuality"
+        app:layout_constraintEnd_toEndOf="@+id/leftView"
+        app:layout_constraintStart_toStartOf="@+id/leftView"
+        app:layout_constraintTop_toBottomOf="@+id/tvNetworkType"
+        tools:text="Android Network" />
+
+    <!-- Plain-language signal level ("Good signal"), so the user knows what to expect before
+         starting the test. Hidden while offline or without a signal value. -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSignalQuality"
+        style="@style/rmbt_RobotoRegularStyle.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/rmbt_padding_very_small"
+        android:gravity="center"
+        android:textColor="@color/rmbt_text_white_transparency_80"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/tvLblNoConnection"
+        app:layout_constraintEnd_toEndOf="@+id/leftView"
+        app:layout_constraintStart_toStartOf="@+id/leftView"
+        app:layout_constraintTop_toBottomOf="@+id/tvNetworkName"
+        tools:text="Good signal" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLblNoConnection"
+        style="@style/rmbt_RobotoRegularStyle.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rmbt_margin_medium"
+        android:layout_marginEnd="@dimen/rmbt_margin_medium"
+        android:gravity="center"
+        android:text="@string/rmbt_home_no_internet_connection_details"
+        android:textColor="@color/rmbt_text_gray"
+        android:visibility="gone"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@+id/leftView"
+        app:layout_constraintEnd_toEndOf="@+id/leftView"
+        app:layout_constraintStart_toStartOf="@+id/leftView"
+        app:layout_constraintTop_toBottomOf="@+id/tvSignalQuality" />
+
+    <!-- The user's newest speed test, in the right panel; tapping it opens the result. -->
+    <tj.zehn.rmbt.ui.view.LastTestCardView
+        android:id="@+id/lastTestCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rmbt_margin_large"
+        android:layout_marginEnd="@dimen/rmbt_margin_large"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/rightView"
+        app:layout_constraintEnd_toEndOf="@+id/rightView"
+        app:layout_constraintStart_toStartOf="@+id/rightView"
+        app:layout_constraintTop_toTopOf="@+id/rightView"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Wi-Fi SSID on the start screen; read only when the host app already holds the location permission. -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application>
+        <activity
+            android:name="tj.zehn.rmbt.ui.screen.SpeedtestActivity"
+            android:exported="false"
+            android:theme="@style/rmbt_AppTheme" />
+        <activity
+            android:name="tj.zehn.rmbt.ui.screen.MeasurementActivity"
+            android:exported="false"
+            android:theme="@style/rmbt_MeasurementTheme" />
+        <activity
+            android:name="tj.zehn.rmbt.ui.screen.ResultActivity"
+            android:exported="false"
+            android:theme="@style/rmbt_PreferenceTheme" />
+        <activity
+            android:name="tj.zehn.rmbt.ui.screen.RmbtHistoryActivity"
+            android:exported="false"
+            android:theme="@style/rmbt_PreferenceTheme" />
+    </application>
+
+</manifest>

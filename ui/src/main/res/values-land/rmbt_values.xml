@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copied from open-rmbt-android; names prefixed with rmbt_. -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="rmbt_home_brand_logo_height">32dp</dimen>
+    <dimen name="rmbt_signal_bar_top_margin">8dp</dimen>
+</resources>

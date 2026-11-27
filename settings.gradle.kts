@@ -17,3 +17,6 @@ dependencyResolutionManagement {
 
 include(":rmbt-sdk")
 project(":rmbt-sdk").projectDir = file("core")
+
+include(":rmbt-sdk-ui")
+project(":rmbt-sdk-ui").projectDir = file("ui")

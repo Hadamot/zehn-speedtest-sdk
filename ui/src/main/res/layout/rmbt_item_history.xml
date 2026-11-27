@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Copied from open-rmbt-android (item_history.xml); values are set from code. -->
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="48dp"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/rmbt_padding_large"
+    android:paddingBottom="@dimen/rmbt_padding_large">
+
+    <ImageView
+        android:id="@+id/imageSignal"
+        android:layout_width="@dimen/rmbt_history_image_size"
+        android:layout_height="@dimen/rmbt_history_image_size"
+        android:contentDescription="@null"
+        android:scaleType="center"
+        tools:src="@drawable/rmbt_ic_history_no_internet" />
+
+    <!-- Time of the test and its overall rating ("Good"), so the list can be scanned at a glance. -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rmbt_margin_medium"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textTime"
+            style="@style/rmbt_RobotoRegularStyle.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/rmbt_text_dark_gray"
+            tools:text="Today, 12:00" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textRating"
+            style="@style/rmbt_RobotoMediumStyle.VerySmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Good"
+            tools:textColor="@color/rmbt_classification_green" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textDownload"
+        style="@style/rmbt_RobotoRegularStyle.Small"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="@dimen/rmbt_padding_very_small"
+        android:textColor="@color/rmbt_text_dark_gray"
+        tools:drawableStart="@drawable/rmbt_ic_small_download_light_green"
+        tools:text="79" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textUpload"
+        style="@style/rmbt_RobotoRegularStyle.Small"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="@dimen/rmbt_padding_very_small"
+        android:textColor="@color/rmbt_text_dark_gray"
+        tools:drawableStart="@drawable/rmbt_ic_small_upload_light_green"
+        tools:text="12" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textPing"
+        style="@style/rmbt_RobotoRegularStyle.Small"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="@dimen/rmbt_padding_very_small"
+        android:textColor="@color/rmbt_text_dark_gray"
+        tools:drawableStart="@drawable/rmbt_ic_small_ping_yellow"
+        tools:text="14" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

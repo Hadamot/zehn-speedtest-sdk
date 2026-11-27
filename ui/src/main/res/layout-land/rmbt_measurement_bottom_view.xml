@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copied from open-rmbt-android (layout-land/measurement_bottom_view.xml): the panel fills the right
+  ~ side of the screen. Loop mode and QoS views are removed; the values are set from code (view binding).
+  -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/measurement_bottom_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rmbt_background_measurement_bottom"
+    android:paddingBottom="@dimen/rmbt_padding_medium">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/viewHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rmbt_measurement_bottom_header_background"
+        android:minHeight="@dimen/rmbt_measurement_bottom_header_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelMeasurementBottomPing"
+            style="@style/rmbt_RobotoRegularStyle.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/rmbt_margin_large"
+            android:layout_marginTop="@dimen/rmbt_margin_small"
+            android:text="@string/rmbt_measurement_ping"
+            android:textColor="@color/rmbt_text_white_transparency_50"
+            app:layout_constraintEnd_toStartOf="@+id/labelMeasurementBottomDownload"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelMeasurementBottomDownload"
+            style="@style/rmbt_RobotoRegularStyle.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/rmbt_margin_small"
+            android:text="@string/rmbt_measurement_down"
+            android:textColor="@color/rmbt_text_white_transparency_50"
+            app:layout_constraintEnd_toStartOf="@+id/labelMeasurementBottomUpload"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/labelMeasurementBottomPing"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelMeasurementBottomUpload"
+            style="@style/rmbt_RobotoRegularStyle.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/rmbt_margin_small"
+            android:text="@string/rmbt_measurement_up"
+            android:textColor="@color/rmbt_text_white_transparency_50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/labelMeasurementBottomDownload"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatImageView1"
+            style="@style/rmbt_RobotoMediumStyle.VerySmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/rmbt_margin_large"
+            android:accessibilityTraversalAfter="@id/labelMeasurementBottomPing"
+            android:drawablePadding="@dimen/rmbt_padding_very_small"
+            android:maxLines="2"
+            app:layout_constraintEnd_toStartOf="@+id/textDownloadSpeed"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelMeasurementBottomPing"
+            tools:drawableStart="@drawable/rmbt_ic_small_ping_yellow"
+            tools:text="14 ms"
+            tools:textColor="@android:color/white" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textDownloadSpeed"
+            style="@style/rmbt_RobotoMediumStyle.VerySmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:accessibilityTraversalAfter="@id/labelMeasurementBottomDownload"
+            android:drawablePadding="@dimen/rmbt_padding_very_small"
+            android:maxLines="2"
+            app:layout_constraintEnd_toStartOf="@+id/textUploadSpeed"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/appCompatImageView1"
+            app:layout_constraintTop_toBottomOf="@+id/labelMeasurementBottomDownload"
+            tools:drawableStart="@drawable/rmbt_ic_small_download_light_green"
+            tools:text="24.12 Mbit/s"
+            tools:textColor="@android:color/white" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textUploadSpeed"
+            style="@style/rmbt_RobotoMediumStyle.VerySmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:accessibilityTraversalAfter="@id/labelMeasurementBottomUpload"
+            android:drawablePadding="@dimen/rmbt_padding_very_small"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textDownloadSpeed"
+            app:layout_constraintTop_toBottomOf="@+id/labelMeasurementBottomUpload"
+            tools:drawableStart="@drawable/rmbt_ic_small_upload_gray"
+            tools:text="1000.0 Mbit/s"
+            tools:textColor="@android:color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/labelMeasurementState"
+        style="@style/rmbt_RobotoMediumStyle.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rmbt_margin_large"
+        android:layout_marginEnd="@dimen/rmbt_margin_large"
+        android:accessibilityLiveRegion="polite"
+        android:paddingTop="@dimen/rmbt_padding_medium"
+        android:paddingBottom="@dimen/rmbt_padding_very_small"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHeader"
+        tools:text="@string/rmbt_measurement_download" />
+
+    <!-- What the current step measures, in plain words. -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textMeasurementPhaseHint"
+        style="@style/rmbt_RobotoRegularStyle.Small"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rmbt_margin_large"
+        android:layout_marginEnd="@dimen/rmbt_margin_large"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingBottom="@dimen/rmbt_padding_medium"
+        android:textColor="@color/rmbt_text_white_transparency_50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelMeasurementState"
+        tools:text="@string/rmbt_measurement_phase_download_hint" />
+
+    <tj.zehn.rmbt.ui.view.SpeedLineChart
+        android:id="@+id/speedChartDownloadUpload"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:rmbt_grid_color="@color/rmbt_chart_grid_line_color"
+        app:rmbt_grid_row="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_max="@dimen/rmbt_speed_chart_height"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMeasurementPhaseHint"
+        app:rmbt_progress_fill_color="@color/rmbt_speed_chart_progress_fill_color"
+        app:rmbt_progress_line_color="@color/rmbt_colorAccent"
+        app:rmbt_xlabel_color="@color/rmbt_text_gray"
+        app:rmbt_xlabel_text_size="@dimen/rmbt_chart_label_text_size"
+        app:rmbt_ylabel_color="@color/rmbt_text_gray"
+        app:rmbt_ylabel_text_size="@dimen/rmbt_chart_label_text_size" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
