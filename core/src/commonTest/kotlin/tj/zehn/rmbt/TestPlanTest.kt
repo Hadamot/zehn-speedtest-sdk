@@ -45,4 +45,12 @@ class TestPlanTest {
         assertEquals("https://speedtest.tojiktelecom.tj/RMBTControlServer", RmbtConfig().controlUrl)
         assertEquals(RmbtConfig.DEFAULT_CONTROL_URL, RmbtConfig(apiKey = "k").controlUrl)
     }
+
+    @Test
+    fun theApiKeyStaysOutOfTheConfigsText() {
+        val text = RmbtConfig(controlUrl = "https://c", apiKey = "secret-key").toString()
+
+        kotlin.test.assertFalse("secret-key" in text, text)
+        kotlin.test.assertTrue("apiKey=***" in text, text)
+    }
 }
