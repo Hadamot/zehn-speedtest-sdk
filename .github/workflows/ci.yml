@@ -15,4 +15,21 @@ jobs:
           distribution: temurin
           java-version: 21
       - uses: gradle/actions/setup-gradle@v5
-      - run: ./gradlew :rmbt-sdk:jvmTest :rmbt-sdk:jsNodeTest :rmbt-sdk:bundleAndroidMainAar
+      - run: ./gradlew :rmbt-sdk:jvmTest :rmbt-sdk:jsNodeTest :rmbt-sdk:bundleAndroidMainAar :rmbt-sdk-ui:testDebugUnitTest :rmbt-sdk-ui:assembleRelease :rmbt-sdk-ui:lintDebug
+
+  ios-ui:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v5
+      - run: ./gradlew :rmbt-sdk:assembleRmbtSdkReleaseXCFramework
+      - name: Test RmbtSdkUI on a simulator
+        env:
+          RMBT_LOCAL_XCFRAMEWORK: "1"
+        run: |
+          device=$(xcrun simctl list devices available -j | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(x['udid'] for r, l in d.items() if 'iOS' in r for x in l if x['name'].startswith('iPhone')))")
+          xcodebuild -scheme RmbtSdk-Package -destination "id=$device" test
