@@ -7,7 +7,11 @@ import kotlin.test.assertTrue
 class EndToEndTest {
     @Test
     fun measuresAndSubmitsAgainstRealBackend() = runBlocking {
-        val controlUrl = System.getenv("RMBT_IT_CONTROL") ?: return@runBlocking
+        // Skipped (reported as such, not as passed) without a backend.
+        val controlUrl: String = System.getenv("RMBT_IT_CONTROL") ?: run {
+            org.junit.Assume.assumeTrue("RMBT_IT_CONTROL is not set", false)
+            return@runBlocking
+        }
         val config = RmbtConfig(
             controlUrl = controlUrl,
             transport = Transport.valueOf(System.getenv("RMBT_IT_TRANSPORT") ?: "TCP"),
