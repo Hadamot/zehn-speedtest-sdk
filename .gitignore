@@ -4,3 +4,6 @@ build/
 .idea/
 local.properties
 *.iml
+.swiftpm/
+.build/
+xcuserdata/
